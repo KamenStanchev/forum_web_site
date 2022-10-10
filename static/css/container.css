@@ -1,0 +1,124 @@
+    .main-container{
+        display: flex;
+        flex-direction: row;
+        min-height: 80%;
+        padding-top: 10px;
+        padding-bottom: 20px;
+        margin-top: 45px;
+        background-color: black;
+
+    }
+
+    .container-name{
+        text-align: center;
+        font-size: 20px;
+        font-weight: bolder;
+        margin-top: 6px;
+    }
+
+    .left-container{
+        display: flex;
+        overflow-y: auto;
+        overflow-x: hidden;
+        flex-direction: column;
+        background-color: lightgrey;
+        flex: 0.7;
+        border-style: solid;
+        border-color: lightslategray;
+        border-width: 4px;
+        margin-left: 14px;
+        padding-bottom: 15px;
+        max-height: 685px;
+
+    }
+
+    .central-container{
+        display: flex;
+        overflow-y: scroll;
+        flex-direction: column;
+        background-color: lightgrey;
+        flex: 3;
+        border-style: solid;
+        border-color: lightslategray;
+        border-width: 4px;
+        margin-left: 14px;
+        max-height: 700px;
+    }
+
+    .right-container{
+        background-color: lightgrey;
+        flex: 1;
+        border-style: solid;
+        border-color: lightslategray;
+        border-width: 4px;
+        margin-left: 14px;
+        margin-right: 14px;
+        max-height: 700px;
+    }
+
+    .container-items{
+        width: 90%;
+        border-radius: 8px;
+        background-color: #4F4247;
+        color: lightgrey;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 5px;
+        padding: 3px;
+        border: 2px solid;
+        box-shadow: 2px 2px 2px;
+        text-align: center;
+    }
+
+    .topic-title{
+        font-weight: bold;
+    }
+
+    .topic-content{
+        font-size: 16px;
+        color: black;
+        background-color: #e3e3da;
+    }
+
+    .topic-author{
+        font-weight: bolder;
+        text-align: right;
+        margin: 0;
+        padding: 0;
+    }
+
+    .status-topic {
+        display: flex;
+        flex-direction: row;
+        font-size: 18px;
+        color: black;
+        background-color: #e3e3da;
+    }
+
+    .status-data-left{
+        margin-top: 2px;
+        margin-bottom: 1px;
+        margin-left: 4px;
+        padding-left: 6px;
+        padding-right: 6px;
+        padding-bottom: 4px;
+        padding-top: 4px;
+        background-color: #6f94c6;
+        border-radius: 12px;
+        color: white;
+        font-weight: bolder;
+    }
+
+    .like-button{
+        height: 26px;
+        margin-right: 5px;
+        margin-left: 3px;
+        margin-top: 1px;
+    }
+
+    .status-data-right{
+        margin-top: 7px;
+        margin-right: 3px;
+        flex: 1;
+        text-align: right;
+    }

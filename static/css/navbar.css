@@ -1,0 +1,100 @@
+ .navbar{
+        display: flex;
+        background-color: gray;
+        height: 42px;
+        font-weight: bolder;
+        font-size: 19px;
+        color: white;
+        border: black 1px solid;
+        border-radius: 3px;
+        box-shadow: #38393b 0 12px 12px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+
+
+    }
+
+    .left-side{
+        display: flex;
+        flex: 1;
+        background-color: black;
+        padding-top: 1px;
+    }
+
+    .hamburger-menu-icon{
+        height: 60px;
+        margin-top: -12px;
+    }
+
+    .home-icon{
+        height: 30px;
+        margin-bottom: 12px;
+    }
+
+    .search-button{
+        border: none;
+        background-color: black;
+        cursor: pointer;
+        height: 33px;
+    }
+
+    .central-side {
+        display: flex;
+        flex: 3;
+        min-width: 250px;
+        background-color: black;
+        justify-content: center;
+
+    }
+
+    .logo{
+        height: 100%;
+
+
+    }
+
+    .right-side{
+        display: flex;
+        flex:2;
+        background-color: black;
+        justify-content: flex-end;
+
+
+    }
+
+    .search-bar{
+        height: 25px;
+        margin-top: 6px;
+
+    }
+
+    .search-bar::placeholder{
+        font-size: 18px;
+    }
+
+    .search-button-icon{
+        height: 33px;
+        background-color: black;
+        border: none;
+    }
+
+
+    .current-user-image{
+        height: 40px;
+        width: 40px;
+        object-fit: cover;
+        margin-top: 1px;
+        margin-left: 3px;
+        border-radius: 25px;
+        flex-shrink: 0;
+    }
+
+    .login-logout-link{
+        height: 30px;
+        width: 30px;
+        margin-left: 10px;
+        margin-top: 5px;
+        flex-shrink: 1;
+    }

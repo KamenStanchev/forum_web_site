@@ -1,0 +1,479 @@
+{% load static %}
+
+<head>
+    <title>Forum Web Page</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/navbar.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/container.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/profile-container.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/topics.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/footer.css' %}"/>
+</head>
+
+<style>
+
+</style>
+
+<body>
+    <div class="navbar">
+        <div class="left-side">
+            <img class="hamburger-menu-icon"
+                 src="{% static 'icons/hamburger-menu.png' %}" alt="NO IMAGE, NO IMAGE, NO IMAGE">
+            <img class="home-icon"
+                 src="{% static 'icons/home-icon1.png' %}">
+
+
+        </div>
+
+        <div class="central-side">
+            <img class="logo" src="{% static 'images/logo.PNG' %}">
+        </div>
+
+        <div class="right-side">
+            <input class="search-bar" type="text" placeholder="Search">
+            <button class="search-button"><img class="search-button-icon" src="{% static 'icons/search-button.png' %}"></button>
+
+            <img class="current-user-image"
+                 src="{% static 'images/profile-image.jfif' %}">
+            <a href="#"><img class="login-logout-link" src="{% static 'icons/logout-icon1.png' %}"></a>
+        </div>
+
+    </div>
+
+    <div class="main-container">
+        <div class="left-container">
+            <p class="container-name">
+                Topics
+            </p>
+            <p class="p-container">
+                <a class="topic-link" href="#">
+                ALL
+            </a>
+            </p>
+            <p class="p-container">
+                <a class="topic-link" href="#">
+                home
+            </a>
+            </p>
+            <p class="p-container">
+                <a class="topic-link" href="#">
+                work
+            </a>
+            </p>
+            <p class="p-container">
+                <a class="topic-link" href="#">
+                hobby
+            </a>
+            </p>
+            <p class="p-container">
+                <a class="topic-link" href="#">
+                sport
+            </a>
+            </p>
+            <p class="p-container">
+                <a class="topic-link" href="#">
+                garden
+            </a>
+            </p>
+            <p class="p-container">
+                <a class="topic-link" href="#">
+                celebrity
+            </a>
+            </p>
+            <p class="p-container">
+                <a class="topic-link" href="#">
+                world
+            </a>
+            </p>
+            <p class="p-container">
+                <a class="topic-link" href="#">
+                school
+            </a>
+            </p>
+            <p class="p-container">
+                <a class="topic-link" href="#">
+                computer game
+            </a>
+            </p>
+            <p class="p-container">
+                <a class="topic-link" href="#">
+                geographic
+            </a>
+            </p>
+            <p class="p-container">
+                <a class="topic-link" href="#">
+                Nintendo
+            </a>
+            </p>
+            <p class="p-container">
+                <a class="topic-link" href="#">
+                PlayStation
+            </a>
+            </p>
+            <p class="p-container">
+                <a class="topic-link" href="#">
+                beauty zone
+            </a>
+            </p>
+            <p class="p-container">
+                <a class="topic-link" href="#">
+                nutrition
+            </a>
+            </p>
+            <p class="p-container">
+                <a class="topic-link" href="#">
+                decoration
+            </a>
+            </p>
+            <p class="p-container">
+                <a class="topic-link" href="#">
+                pets
+            </a>
+            </p>
+            <p class="p-container">
+                <a class="topic-link" href="#">
+                furniture
+            </a>
+            </p>
+            <p class="p-container">
+                <a class="topic-link" href="#">
+                toys
+            </a>
+            </p>
+            <p class="p-container">
+                <a class="topic-link" href="#">
+                teds
+            </a>
+            </p>
+            <p class="p-container">
+                <a class="topic-link" href="#">
+                holidays
+            </a>
+            </p>
+            <p class="p-container">
+                <a class="topic-link" href="#">
+                restaurants
+            </a>
+            </p>
+            <p class="p-container">
+                <a class="topic-link" href="#">
+                2-10 player games
+            </a>
+            </p>
+            <p class="p-container">
+                <a class="topic-link" href="#">
+                electronics
+            </a>
+            </p>
+            <p class="p-container">
+                <a class="topic-link" href="#">
+                kids
+            </a>
+            </p>
+            <p class="p-container">
+                <a class="topic-link" href="#">
+                mode
+            </a>
+            </p>
+            <p class="p-container">
+                <a class="topic-link" href="#">
+                comiks
+            </a>
+            </p>
+            <p class="p-container">
+                <a class="topic-link" href="#">
+                books
+            </a>
+            </p>
+            <p class="p-container">
+                <a class="topic-link" href="#">
+                cars
+            </a>
+            </p>
+            <p class="p-container">
+                <a class="topic-link" href="#">
+                foods
+            </a>
+            </p>
+        </div>
+
+        <div class="central-container">
+
+            <p class="container-name">
+                Latest Posts
+            </p>
+
+            <div class="container-items">
+                <p class="topic-title">
+                    Do you have experience with bitcoins?
+                </p>
+                <p class="topic-content">
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only ve centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing  ...
+                </p>
+                <p class="topic-author">
+                    author: Ruslan Marinov
+                </p>
+                <div class="status-topic">
+                   <div class="status-data-left">13</div>
+                    <a href="#"><img class="like-button" src="{% static 'icons/like.png' %}"></a>
+                    <div class="status-data-right">3 hour ago</div>
+                </div>
+
+            </div>
+
+            <div class="container-items">
+                <p class="topic-title">
+                    The best online shop for cosmetics.
+                </p>
+                <p class="topic-content">
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only ve centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing  ...
+                </p>
+                <p class="topic-author">
+                    author: Kristina Zabezova
+                </p>
+                <div class="status-topic">
+                   <div class="status-data-left">34</div>
+                    <a href="#"><img class="like-button" src="{% static 'icons/like.png' %}"></a>
+                    <div class="status-data-right">21 hour ago</div>
+                </div>
+
+            </div>
+
+            <div class="container-items">
+                <p class="topic-title">
+                    Champion League.
+                </p>
+                <p class="topic-content">
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only ve centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing  ...
+                </p>
+                <p class="topic-author">
+                    author: Georgi Ivanov
+                </p>
+                <div class="status-topic">
+                   <div class="status-data-left">64</div>
+                    <a href="#"><img class="like-button" src="{% static 'icons/like.png' %}"></a>
+                    <div class="status-data-right">2 days ago</div>
+                </div>
+
+            </div>
+
+            <div class="container-items">
+                <p class="topic-title">
+                    How to prevent get cold
+                </p>
+                <p class="topic-content">
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only ve centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing  ...
+                </p>
+                <p class="topic-author">
+                    author: Zornica Madjarova
+                </p>
+                <div class="status-topic">
+                   <div class="status-data-left">340</div>
+                    <a href="#"><img class="like-button" src="{% static 'icons/like.png' %}"></a>
+                    <div class="status-data-right">6 days ago</div>
+                </div>
+
+            </div>
+
+
+
+        </div>
+
+        <div class="right-container">
+
+            <p class="container-name">
+                Profiles
+            </p>
+
+            <div class="profile-container">
+                <div class="profile-details">
+                    <div class="profile-data">
+                        <div class="profile-data-element">
+                            Name: George
+                        </div>
+                        <div class="profile-data-element">
+                            Family-name: Ivanov
+                        </div>
+                        <div class="profile-data-element">
+                            city: Sofia
+                        </div>
+                        <div class="profile-data-element">
+                            profession: teacher
+                        </div>
+                    </div>
+                    <div class="profile-img-container">
+                        <img class="profile-img" src="{% static 'images/profile-image.jfif' %}">
+                    </div>
+                </div>
+
+                <div class="profile-statistic">
+                    <span class="statistic-details">
+                        14 <img class="statistic-icon" src="{% static 'icons/topic.jpg'%}">
+                    </span>
+                    <span class="statistic-details">
+                        14 <img class="statistic-icon" src="{% static 'icons/comment.png'%}">
+                    </span>
+                    <span class="statistic-details">
+                        14 <img class="statistic-icon" src="{% static 'icons/white-like-.png'%}">
+                    </span>
+                </div>
+
+            </div>
+
+            <div class="profile-container">
+                <div class="profile-details">
+                    <div class="profile-data">
+                        <div class="profile-data-element">
+                            Name: Metodi
+                        </div>
+                        <div class="profile-data-element">
+                            Family-name: Alipiev
+                        </div>
+                        <div class="profile-data-element">
+                            city: Pernik
+                        </div>
+                        <div class="profile-data-element">
+                            profession: photographer
+                        </div>
+                    </div>
+                    <div class="profile-img-container">
+                        <img class="profile-img" src="{% static 'images/profile-image-2.jfif' %}">
+                    </div>
+                </div>
+
+                <div class="profile-statistic">
+                    <span class="statistic-details">
+                        4 <img class="statistic-icon" src="{% static 'icons/topic.jpg'%}">
+                    </span>
+                    <span class="statistic-details">
+                        32 <img class="statistic-icon" src="{% static 'icons/comment.png'%}">
+                    </span>
+                    <span class="statistic-details">
+                        19 <img class="statistic-icon" src="{% static 'icons/white-like-.png'%}">
+                    </span>
+                </div>
+
+            </div>
+
+            <div class="profile-container">
+                <div class="profile-details">
+                    <div class="profile-data">
+                        <div class="profile-data-element">
+                            Name: kristina
+                        </div>
+                        <div class="profile-data-element">
+                            Family-name: Zabezova
+                        </div>
+                        <div class="profile-data-element">
+                            city: Plovdiv
+                        </div>
+                        <div class="profile-data-element">
+                            profession: model
+                        </div>
+                    </div>
+                    <div class="profile-img-container">
+                        <img class="profile-img" src="{% static 'images/profile-image-3.jfif' %}">
+                    </div>
+                </div>
+
+                <div class="profile-statistic">
+                    <span class="statistic-details">
+                        1 <img class="statistic-icon" src="{% static 'icons/topic.jpg'%}">
+                    </span>
+                    <span class="statistic-details">
+                        9 <img class="statistic-icon" src="{% static 'icons/comment.png'%}">
+                    </span>
+                    <span class="statistic-details">
+                        7 <img class="statistic-icon" src="{% static 'icons/white-like-.png'%}">
+                    </span>
+                </div>
+
+            </div>
+
+            <div class="profile-container">
+                <div class="profile-details">
+                    <div class="profile-data">
+                        <div class="profile-data-element">
+                            Name: Zornica
+                        </div>
+                        <div class="profile-data-element">
+                            Family-name: Madjarova
+                        </div>
+                        <div class="profile-data-element">
+                            city: Vratsa
+                        </div>
+                        <div class="profile-data-element">
+                            profession: nurses
+                        </div>
+                    </div>
+                    <div class="profile-img-container">
+                        <img class="profile-img" src="{% static 'images/profile-image-4.jfif' %}">
+                    </div>
+                </div>
+
+                <div class="profile-statistic">
+                    <span class="statistic-details">
+                        23 <img class="statistic-icon" src="{% static 'icons/topic.jpg'%}">
+                    </span>
+                    <span class="statistic-details">
+                        65 <img class="statistic-icon" src="{% static 'icons/comment.png'%}">
+                    </span>
+                    <span class="statistic-details">
+                        450 <img class="statistic-icon" src="{% static 'icons/white-like-.png'%}">
+                    </span>
+                </div>
+            </div>
+
+            <div class="profile-container">
+                <div class="profile-details">
+                    <div class="profile-data">
+                        <div class="profile-data-element">
+                            Name: Ruslan
+                        </div>
+                        <div class="profile-data-element">
+                            Family-name: Marinov
+                        </div>
+                        <div class="profile-data-element">
+                            city: Montana
+                        </div>
+                        <div class="profile-data-element">
+                            profession: bloger
+                        </div>
+                    </div>
+                    <div class="profile-img-container">
+                        <img class="profile-img" src="{% static 'images/profile-image-5.jfif' %}">
+                    </div>
+                </div>
+
+                <div class="profile-statistic">
+                    <span class="statistic-details">
+                        37 <img class="statistic-icon" src="{% static 'icons/topic.jpg'%}">
+                    </span>
+                    <span class="statistic-details">
+                        88 <img class="statistic-icon" src="{% static 'icons/comment.png'%}">
+                    </span>
+                    <span class="statistic-details">
+                        377 <img class="statistic-icon" src="{% static 'icons/white-like-.png'%}">
+                    </span>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+</body>
+
+<footer>
+    <span class="copyright-content">
+        <img class="copyright-symbol" src="{% static 'icons/copyright.png'%}">
+        2022 Kamen Stanchev
+    </span>
+</footer>

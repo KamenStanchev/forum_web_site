@@ -1,0 +1,26 @@
+    .p-container{
+        margin: 7px 0 6px 3px;
+        transition: transform .2s;
+        transform-origin: left center;
+    }
+
+    .p-container:hover{
+        transform: scale(1.5);
+    }
+
+    .topic-link{
+        font-size: 16px;
+        font-weight: bolder;
+        text-decoration: none;
+        color: black;
+        background-color: #e3e3da;
+        border: black 1px solid;
+        padding: 0 7px 0 7px;
+        border-radius: 12px;
+
+    }
+
+    .topic-link:hover {
+        color: white;
+        background-color: lightslategray;
+}
