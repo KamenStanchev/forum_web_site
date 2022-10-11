@@ -1,13 +1,84 @@
-{% if user.is_authenticated %}
-    <p>Welcome, {{ user.get_username }}. Thanks for logging in.</p>
-{% else %}
-    <p>Welcome, new user. Please log in.</p>
-{% endif %}
+{% extends 'base.html' %}
 
-<h2>Sign up</h2>
- <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
+{% load static %}
 
-     <button type="submit" >SUBMIT</button>
+{% block page_content %}
 
+{#{% if user.is_authenticated %}#}
+{#    <p>Welcome, {{ user.get_username }}. Thanks for logging in.</p>#}
+{#{% else %}#}
+{#    <p>Welcome, new user. Please log in.</p>#}
+{#{% endif %}#}
+
+    <style>
+        .user-form {
+            display: flex;
+            flex-direction: column;
+            margin: 65px auto 40px auto;
+            padding: 20px;
+            width: 350px;
+            border: black 3px solid;
+            border-radius: 3px;
+            box-shadow: #1b1b1b 15px 15px 15px;
+            background-color: lightgrey;
+        }
+
+        .title-registration-box{
+            background-color: grey;
+            text-align: center;
+
+        }
+
+        input{
+            background-color: beige;
+            width: 250px;
+            height: 30px;
+            box-shadow: #1b1b1b 5px 5px 5px;
+            margin: 10px 0;
+            align-self: center;
+            font-size: 18px;
+        }
+
+        input:focus {
+          background-color: white;
+            border: #1b1b1b 2px solid;
+            box-shadow: none;
+        }
+
+        .label{
+            font-size: 18px;
+            }
+
+        .registrate-button {
+            width: 100%;
+            background-color: grey;
+            color: black;
+            font-size: 18px;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border-radius: 4px;
+            box-shadow: #1b1b1b 3px 3px 5px;
+            cursor: pointer;
+        }
+
+        .registrate-button:hover {
+            color: white;
+            box-shadow: #1b1b1b 10px 10px 15px;
+            background-color: darkslategrey;
+        }
+
+    </style>
+
+     <form class="user-form"  method="post">
+         <h2 class="title-registration-box">Sign up</h2>
+         {% csrf_token %}
+         {% for field in form %}
+             <span class="label">
+                {{ field.label }}
+             </span>
+             {{ field }}
+         {% endfor %}
+
+         <button class="registrate-button" type="submit" >Registrate</button>
+
+{% endblock %}

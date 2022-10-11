@@ -1,0 +1,57 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>Forum</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+        <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}"/>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/navbar.css' %}"/>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/container.css' %}"/>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/profile-container.css' %}"/>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/topics.css' %}"/>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/footer.css' %}"/>
+    </head>
+
+    <body>
+
+        <div class="navbar">
+                <div class="left-side">
+                    <img class="hamburger-menu-icon"
+                         src="{% static 'icons/hamburger-menu.png' %}" alt="NO IMAGE, NO IMAGE, NO IMAGE">
+                    <img class="home-icon"
+                         src="{% static 'icons/home-icon1.png' %}">
+                </div>
+
+                <div class="central-side">
+                    <img class="logo" src="{% static 'images/logo.PNG' %}">
+                </div>
+
+                <div class="right-side">
+                    <input class="search-bar" type="text" placeholder="Search">
+                    <button class="search-button"><img class="search-button-icon" src="{% static 'icons/search-button.png' %}"></button>
+
+                    <img class="current-user-image"
+                         src="{% static 'images/profile-image.jfif' %}">
+                    <a href="#"><img class="login-logout-link" src="{% static 'icons/logout-icon1.png' %}"></a>
+                </div>
+        </div>
+
+        <div class="container">
+            {% block page_content %}
+
+            {% endblock %}
+        </div>
+        <footer>
+            <span class="copyright-content">
+                <img class="copyright-symbol" src="{% static 'icons/copyright.png'%}">
+                    2022 Kamen Stanchev
+            </span>
+</footer>
+    </body>
+</html>
