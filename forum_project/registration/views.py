@@ -1,6 +1,7 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, forms, logout
+from django.http import HttpResponse
 from django.shortcuts import redirect, render
-from .forms import SignUpForm
+from .forms import SignUpForm, LogInForm
 from .models import Profile
 
 
@@ -12,6 +13,7 @@ def update_user_data(user):
 
 
 def signup(request):
+    title = 'REGISTRATION'
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
@@ -31,4 +33,29 @@ def signup(request):
             return redirect('home')
     else:
         form = SignUpForm()
-    return render(request, 'signup.html', {'form': form})
+    return render(request, 'registration.html', {'form': form, 'title': title})
+
+
+def login_page(request):
+    form = LogInForm()
+    title = 'LOGIN'
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            # messages.info(request, 'You successfully login.')
+            return redirect('home')
+        # else:
+        #     messages.error(request, f'User name: "{username}" or password is not correct.')
+
+    return render(request, 'registration.html', context={'form': form, 'title': title}, )
+
+
+def logout_page(request):
+    logout(request)
+    return redirect('home')
+

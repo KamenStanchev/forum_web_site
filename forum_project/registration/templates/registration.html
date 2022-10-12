@@ -4,11 +4,7 @@
 
 {% block page_content %}
 
-{#{% if user.is_authenticated %}#}
-{#    <p>Welcome, {{ user.get_username }}. Thanks for logging in.</p>#}
-{#{% else %}#}
-{#    <p>Welcome, new user. Please log in.</p>#}
-{#{% endif %}#}
+
 
     <style>
         .user-form {
@@ -67,10 +63,22 @@
             background-color: darkslategrey;
         }
 
+        .link-in-registration-box{
+            margin-top: 12px;
+            text-align: center;
+            color: black;
+            font-size: 14px;
+            transition: transform 0.1s;
+        }
+
+        .link-in-registration-box:hover{
+            transform: scale(1.5);
+        }
+
     </style>
 
      <form class="user-form"  method="post">
-         <h2 class="title-registration-box">Sign up</h2>
+         <h2 class="title-registration-box">{{ title }} FORM</h2>
          {% csrf_token %}
          {% for field in form %}
              <span class="label">
@@ -79,6 +87,11 @@
              {{ field }}
          {% endfor %}
 
-         <button class="registrate-button" type="submit" >Registrate</button>
+         <button class="registrate-button" type="submit" >{{ title }}</button>
+        {% if title == 'REGISTRATION' %}
+            <a class="link-in-registration-box" href="{% url 'login' %}">login</a>
+        {% elif title == 'LOGIN' %}
+            <a class="link-in-registration-box" href="{% url 'signup' %}">registrate now</a>
+        {% endif  %}
 
 {% endblock %}
