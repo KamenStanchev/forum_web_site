@@ -77,7 +77,7 @@
 
     </style>
 
-     <form class="user-form"  method="post">
+     <form class="user-form"  method="post" enctype="multipart/form-data">
          <h2 class="title-registration-box">{{ title }} FORM</h2>
          {% csrf_token %}
          {% for field in form %}
@@ -93,5 +93,6 @@
         {% elif title == 'LOGIN' %}
             <a class="link-in-registration-box" href="{% url 'signup' %}">registrate now</a>
         {% endif  %}
+
 
 {% endblock %}

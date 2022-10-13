@@ -36,14 +36,14 @@
                     <input class="search-bar" type="text" placeholder="Search">
                     <button class="search-button"><img class="search-button-icon" src="{% static 'icons/search-button.png' %}"></button>
                     {% if user.is_authenticated %}
-                        <img class="current-user-image"
-                            src="{% static 'images/profile-image.jfif' %}">
+                        <img class="current-user-image" src="{{ user.profile.profile_img.url }}">
                         <a href="{% url 'logout' %}"><img class="login-logout-link" src="{% static 'icons/logout-icon1.png' %}"></a>
                     {% else %}
                         <img class="current-user-image"
                             src="{% static 'images/no-profile-image.jfif' %}">
                         <a href="{% url 'login' %}"><img class="login-logout-link" src="{% static 'icons/login-icon.png' %}"></a>
                     {% endif %}
+
 
                 </div>
         </div>

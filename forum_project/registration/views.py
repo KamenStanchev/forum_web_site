@@ -1,8 +1,7 @@
-from django.contrib.auth import authenticate, login, forms, logout
-from django.http import HttpResponse
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect, render
 from .forms import SignUpForm, LogInForm
-from .models import Profile
+from forum_project.main_app.models import Profile
 
 
 def update_user_data(user):

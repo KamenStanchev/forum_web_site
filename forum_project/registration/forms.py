@@ -11,5 +11,6 @@ class SignUpForm(UserCreationForm):
         model = User
         fields = ('username', 'city', 'profession', 'password1', 'password2', )
 
+
 class LogInForm(AuthenticationForm):
     pass
