@@ -29,79 +29,24 @@
                 Latest Posts
             </p>
 
-            <div class="container-items">
+            {% for article in articles %}
+                <div class="container-items">
                 <p class="topic-title">
-                    Do you have experience with bitcoins?
+                    {{ article.title }}
                 </p>
                 <p class="topic-content">
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only ve centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing  ...
+                    {{ article.content }}
                 </p>
                 <p class="topic-author">
-                    author: Ruslan Marinov
+                    author: {{ article.user.first_name }} {{ article.user.last_name }}
                 </p>
                 <div class="status-topic">
-                   <div class="status-data-left">13</div>
-                    <a href="#"><img class="like-button" src="{% static 'icons/like.png' %}"></a>
-                    <div class="status-data-right">3 hour ago</div>
+                   <div class="status-data-left">{{ article.likes }}</div>
+                    <a href="{% url 'likes' article.id %}"><img class="like-button" src="{% static 'icons/like.png' %}"></a>
+                    <div class="status-data-right">{{ article.date_created }}</div>
                 </div>
-
             </div>
-
-            <div class="container-items">
-                <p class="topic-title">
-                    The best online shop for cosmetics.
-                </p>
-                <p class="topic-content">
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only ve centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing  ...
-                </p>
-                <p class="topic-author">
-                    author: Kristina Zabezova
-                </p>
-                <div class="status-topic">
-                   <div class="status-data-left">34</div>
-                    <a href="#"><img class="like-button" src="{% static 'icons/like.png' %}"></a>
-                    <div class="status-data-right">21 hour ago</div>
-                </div>
-
-            </div>
-
-            <div class="container-items">
-                <p class="topic-title">
-                    Champion League.
-                </p>
-                <p class="topic-content">
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only ve centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing  ...
-                </p>
-                <p class="topic-author">
-                    author: Georgi Ivanov
-                </p>
-                <div class="status-topic">
-                   <div class="status-data-left">64</div>
-                    <a href="#"><img class="like-button" src="{% static 'icons/like.png' %}"></a>
-                    <div class="status-data-right">2 days ago</div>
-                </div>
-
-            </div>
-
-            <div class="container-items">
-                <p class="topic-title">
-                    How to prevent get cold
-                </p>
-                <p class="topic-content">
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only ve centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing  ...
-                </p>
-                <p class="topic-author">
-                    author: Zornica Madjarova
-                </p>
-                <div class="status-topic">
-                   <div class="status-data-left">340</div>
-                    <a href="#"><img class="like-button" src="{% static 'icons/like.png' %}"></a>
-                    <div class="status-data-right">6 days ago</div>
-                </div>
-
-            </div>
-
-
+            {% endfor %}
 
         </div>
 

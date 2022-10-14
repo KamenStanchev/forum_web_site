@@ -28,12 +28,13 @@
                       <span><img class="hamburger-menu-icon"
                          src="{% static 'icons/hamburger-menu.png' %}" alt="NO IMAGE, NO IMAGE, NO IMAGE"></span>
                       <div class="dropdown-content">
-                      <p>Hello World!</p>
+                          <p>Hello World!</p>
+                          <p><a style="color: white" href="{% url 'create_post_article' %}">Create New Article</a></p>
                       </div>
                     </div>
 
-                    <img class="home-icon"
-                         src="{% static 'icons/home-icon1.png' %}">
+                    <a href="{% url 'home' %}"><img class="home-icon"
+                         src="{% static 'icons/home-icon1.png' %}"></a>
                 </div>
 
                 <div class="central-side">

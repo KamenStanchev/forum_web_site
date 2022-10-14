@@ -6,5 +6,6 @@ from forum_project.main_app.views import CreatePostArticle
 urlpatterns = [
     path('', views.home, name='home'),
     path('edit-profile/', views.edit_profile, name='edit_profile'),
-    path('create-post-article/', CreatePostArticle.as_view(), name='create_post_article')
+    path('create-post-article/', CreatePostArticle.as_view(), name='create_post_article'),
+    path( 'likes/<int:pk>/', views.likes, name='likes')
 ]

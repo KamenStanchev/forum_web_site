@@ -3,16 +3,18 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 
-from forum_project.main_app.forms import EditProfileForm, PostArticleForm
+from forum_project.main_app.forms import EditProfileForm
 from forum_project.main_app.models import Profile, Topic, PostArticle
 
 
 def home(request):
     topics = Topic.objects.all()
     profiles = Profile.objects.all()
+    articles = PostArticle.objects.all()
     context={
         'topics': topics,
         'profiles': profiles,
+        'articles': articles,
     }
     return render(request, 'home.html', context)
 
@@ -45,5 +47,12 @@ class CreatePostArticle(LoginRequiredMixin, CreateView):
         context = super(CreatePostArticle, self).get_context_data(*args, **kwargs)
         context['title'] = 'CREATE ARTICLE'
         return context
+
+
+def likes(request, pk):
+    current_article = PostArticle.objects.get(id=pk)
+    current_article.likes += 1
+    current_article.save()
+    return redirect('home')
 
 
