@@ -14,151 +14,13 @@
                 ALL
             </a>
             </p>
-            <p class="p-container">
+            {% for topic in topics %}
+                <p class="p-container">
                 <a class="topic-link" href="#">
-                home
+                {{ topic }}
             </a>
             </p>
-            <p class="p-container">
-                <a class="topic-link" href="#">
-                work
-            </a>
-            </p>
-            <p class="p-container">
-                <a class="topic-link" href="#">
-                hobby
-            </a>
-            </p>
-            <p class="p-container">
-                <a class="topic-link" href="#">
-                sport
-            </a>
-            </p>
-            <p class="p-container">
-                <a class="topic-link" href="#">
-                garden
-            </a>
-            </p>
-            <p class="p-container">
-                <a class="topic-link" href="#">
-                celebrity
-            </a>
-            </p>
-            <p class="p-container">
-                <a class="topic-link" href="#">
-                world
-            </a>
-            </p>
-            <p class="p-container">
-                <a class="topic-link" href="#">
-                school
-            </a>
-            </p>
-            <p class="p-container">
-                <a class="topic-link" href="#">
-                computer game
-            </a>
-            </p>
-            <p class="p-container">
-                <a class="topic-link" href="#">
-                geographic
-            </a>
-            </p>
-            <p class="p-container">
-                <a class="topic-link" href="#">
-                Nintendo
-            </a>
-            </p>
-            <p class="p-container">
-                <a class="topic-link" href="#">
-                PlayStation
-            </a>
-            </p>
-            <p class="p-container">
-                <a class="topic-link" href="#">
-                beauty zone
-            </a>
-            </p>
-            <p class="p-container">
-                <a class="topic-link" href="#">
-                nutrition
-            </a>
-            </p>
-            <p class="p-container">
-                <a class="topic-link" href="#">
-                decoration
-            </a>
-            </p>
-            <p class="p-container">
-                <a class="topic-link" href="#">
-                pets
-            </a>
-            </p>
-            <p class="p-container">
-                <a class="topic-link" href="#">
-                furniture
-            </a>
-            </p>
-            <p class="p-container">
-                <a class="topic-link" href="#">
-                toys
-            </a>
-            </p>
-            <p class="p-container">
-                <a class="topic-link" href="#">
-                teds
-            </a>
-            </p>
-            <p class="p-container">
-                <a class="topic-link" href="#">
-                holidays
-            </a>
-            </p>
-            <p class="p-container">
-                <a class="topic-link" href="#">
-                restaurants
-            </a>
-            </p>
-            <p class="p-container">
-                <a class="topic-link" href="#">
-                2-10 player games
-            </a>
-            </p>
-            <p class="p-container">
-                <a class="topic-link" href="#">
-                electronics
-            </a>
-            </p>
-            <p class="p-container">
-                <a class="topic-link" href="#">
-                kids
-            </a>
-            </p>
-            <p class="p-container">
-                <a class="topic-link" href="#">
-                mode
-            </a>
-            </p>
-            <p class="p-container">
-                <a class="topic-link" href="#">
-                comiks
-            </a>
-            </p>
-            <p class="p-container">
-                <a class="topic-link" href="#">
-                books
-            </a>
-            </p>
-            <p class="p-container">
-                <a class="topic-link" href="#">
-                cars
-            </a>
-            </p>
-            <p class="p-container">
-                <a class="topic-link" href="#">
-                foods
-            </a>
-            </p>
+            {% endfor %}
         </div>
 
         <div class="central-container">
@@ -249,24 +111,26 @@
                 Profiles
             </p>
 
-            <div class="profile-container">
+            {% for profile in profiles %}
+
+                            <div class="profile-container">
                 <div class="profile-details">
                     <div class="profile-data">
                         <div class="profile-data-element">
-                            Name: George
+                            Name: {{ profile.first_name }}
                         </div>
                         <div class="profile-data-element">
-                            Family-name: Ivanov
+                            Family-name: {{ profile.last_name }}
                         </div>
                         <div class="profile-data-element">
-                            city: Sofia
+                            city: {{ profile.city }}
                         </div>
                         <div class="profile-data-element">
-                            profession: teacher
+                            profession: {{ profile.profession }}
                         </div>
                     </div>
                     <div class="profile-img-container">
-                        <img class="profile-img" src="{% static 'images/profile-image.jfif' %}">
+                        <img class="profile-img" src="{{ profile.profile_img.url }}">
                     </div>
                 </div>
 
@@ -284,143 +148,8 @@
 
             </div>
 
-            <div class="profile-container">
-                <div class="profile-details">
-                    <div class="profile-data">
-                        <div class="profile-data-element">
-                            Name: Metodi
-                        </div>
-                        <div class="profile-data-element">
-                            Family-name: Alipiev
-                        </div>
-                        <div class="profile-data-element">
-                            city: Pernik
-                        </div>
-                        <div class="profile-data-element">
-                            profession: photographer
-                        </div>
-                    </div>
-                    <div class="profile-img-container">
-                        <img class="profile-img" src="{% static 'images/profile-image-2.jfif' %}">
-                    </div>
-                </div>
+            {% endfor %}
 
-                <div class="profile-statistic">
-                    <span class="statistic-details">
-                        4 <img class="statistic-icon" src="{% static 'icons/topic.jpg'%}">
-                    </span>
-                    <span class="statistic-details">
-                        32 <img class="statistic-icon" src="{% static 'icons/comment.png'%}">
-                    </span>
-                    <span class="statistic-details">
-                        19 <img class="statistic-icon" src="{% static 'icons/white-like-.png'%}">
-                    </span>
-                </div>
-
-            </div>
-
-            <div class="profile-container">
-                <div class="profile-details">
-                    <div class="profile-data">
-                        <div class="profile-data-element">
-                            Name: kristina
-                        </div>
-                        <div class="profile-data-element">
-                            Family-name: Zabezova
-                        </div>
-                        <div class="profile-data-element">
-                            city: Plovdiv
-                        </div>
-                        <div class="profile-data-element">
-                            profession: model
-                        </div>
-                    </div>
-                    <div class="profile-img-container">
-                        <img class="profile-img" src="{% static 'images/profile-image-3.jfif' %}">
-                    </div>
-                </div>
-
-                <div class="profile-statistic">
-                    <span class="statistic-details">
-                        1 <img class="statistic-icon" src="{% static 'icons/topic.jpg'%}">
-                    </span>
-                    <span class="statistic-details">
-                        9 <img class="statistic-icon" src="{% static 'icons/comment.png'%}">
-                    </span>
-                    <span class="statistic-details">
-                        7 <img class="statistic-icon" src="{% static 'icons/white-like-.png'%}">
-                    </span>
-                </div>
-
-            </div>
-
-            <div class="profile-container">
-                <div class="profile-details">
-                    <div class="profile-data">
-                        <div class="profile-data-element">
-                            Name: Zornica
-                        </div>
-                        <div class="profile-data-element">
-                            Family-name: Madjarova
-                        </div>
-                        <div class="profile-data-element">
-                            city: Vratsa
-                        </div>
-                        <div class="profile-data-element">
-                            profession: nurses
-                        </div>
-                    </div>
-                    <div class="profile-img-container">
-                        <img class="profile-img" src="{% static 'images/profile-image-4.jfif' %}">
-                    </div>
-                </div>
-
-                <div class="profile-statistic">
-                    <span class="statistic-details">
-                        23 <img class="statistic-icon" src="{% static 'icons/topic.jpg'%}">
-                    </span>
-                    <span class="statistic-details">
-                        65 <img class="statistic-icon" src="{% static 'icons/comment.png'%}">
-                    </span>
-                    <span class="statistic-details">
-                        450 <img class="statistic-icon" src="{% static 'icons/white-like-.png'%}">
-                    </span>
-                </div>
-            </div>
-
-            <div class="profile-container">
-                <div class="profile-details">
-                    <div class="profile-data">
-                        <div class="profile-data-element">
-                            Name: Ruslan
-                        </div>
-                        <div class="profile-data-element">
-                            Family-name: Marinov
-                        </div>
-                        <div class="profile-data-element">
-                            city: Montana
-                        </div>
-                        <div class="profile-data-element">
-                            profession: bloger
-                        </div>
-                    </div>
-                    <div class="profile-img-container">
-                        <img class="profile-img" src="{% static 'images/profile-image-5.jfif' %}">
-                    </div>
-                </div>
-
-                <div class="profile-statistic">
-                    <span class="statistic-details">
-                        37 <img class="statistic-icon" src="{% static 'icons/topic.jpg'%}">
-                    </span>
-                    <span class="statistic-details">
-                        88 <img class="statistic-icon" src="{% static 'icons/comment.png'%}">
-                    </span>
-                    <span class="statistic-details">
-                        377 <img class="statistic-icon" src="{% static 'icons/white-like-.png'%}">
-                    </span>
-                </div>
-            </div>
         </div>
     </div>
 

@@ -16,14 +16,22 @@
         <link rel="stylesheet" type="text/css" href="{% static 'css/profile-container.css' %}"/>
         <link rel="stylesheet" type="text/css" href="{% static 'css/topics.css' %}"/>
         <link rel="stylesheet" type="text/css" href="{% static 'css/footer.css' %}"/>
+
     </head>
 
     <body>
 
         <div class="navbar">
                 <div class="left-side">
-                    <img class="hamburger-menu-icon"
-                         src="{% static 'icons/hamburger-menu.png' %}" alt="NO IMAGE, NO IMAGE, NO IMAGE">
+
+                    <div class="dropdown">
+                      <span><img class="hamburger-menu-icon"
+                         src="{% static 'icons/hamburger-menu.png' %}" alt="NO IMAGE, NO IMAGE, NO IMAGE"></span>
+                      <div class="dropdown-content">
+                      <p>Hello World!</p>
+                      </div>
+                    </div>
+
                     <img class="home-icon"
                          src="{% static 'icons/home-icon1.png' %}">
                 </div>
