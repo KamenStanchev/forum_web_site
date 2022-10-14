@@ -7,5 +7,6 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('edit-profile/', views.edit_profile, name='edit_profile'),
     path('create-post-article/', CreatePostArticle.as_view(), name='create_post_article'),
-    path( 'likes/<int:pk>/', views.likes, name='likes')
+    path('create-comment/<int:pk>/', views.CreateComment.as_view(), name='create-comment'),
+    path('likes/<int:pk>/', views.likes, name='likes')
 ]

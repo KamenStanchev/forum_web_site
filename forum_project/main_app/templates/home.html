@@ -41,9 +41,12 @@
                     author: {{ article.user.first_name }} {{ article.user.last_name }}
                 </p>
                 <div class="status-topic">
-                   <div class="status-data-left">{{ article.likes }}</div>
-                    <a href="{% url 'likes' article.id %}"><img class="like-button" src="{% static 'icons/like.png' %}"></a>
+                    <div class="status-data-left" style="background-color: darkslategrey">{{ article.likes }}</div>
+                        <a href="{% url 'likes' article.id %}"><img class="like-button" src="{% static 'icons/like.png' %}"></a>
+                    <div class="status-data-left" style="background-color: darkslategrey">{{ article.likes }}</div>
+                        <a href="{% url 'likes' article.id %}"><img class="like-button" src="{% static 'icons/comment-black.png' %}"></a>
                     <div class="status-data-right">{{ article.date_created }}</div>
+
                 </div>
             </div>
             {% endfor %}

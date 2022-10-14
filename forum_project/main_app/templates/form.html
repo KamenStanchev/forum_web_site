@@ -78,7 +78,7 @@
     </style>
 
      <form class="user-form"  method="post" enctype="multipart/form-data">
-         <h2 class="title-registration-box">{{ title }} FORM</h2>
+         <h2 class="title-registration-box">{{ title }}</h2>
          {% csrf_token %}
          {% for field in form %}
              <span class="label">

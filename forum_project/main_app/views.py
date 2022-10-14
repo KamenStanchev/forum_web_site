@@ -4,14 +4,14 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView
 
 from forum_project.main_app.forms import EditProfileForm
-from forum_project.main_app.models import Profile, Topic, PostArticle
+from forum_project.main_app.models import Profile, Topic, PostArticle, ArticleComment
 
 
 def home(request):
     topics = Topic.objects.all()
     profiles = Profile.objects.all()
     articles = PostArticle.objects.all()
-    context={
+    context = {
         'topics': topics,
         'profiles': profiles,
         'articles': articles,
@@ -49,10 +49,27 @@ class CreatePostArticle(LoginRequiredMixin, CreateView):
         return context
 
 
+class CreateComment(LoginRequiredMixin, CreateView):
+    model = ArticleComment
+    fields = ['content', ]
+    template_name = 'form.html'
+    success_url = reverse_lazy('home')
+
+    def form_valid(self, form):
+        current_article = PostArticle.objects.get(id=self.kwargs['pk'])
+        form.instance.post_article = current_article
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+    def get_context_data(self, *args, **kwargs):
+        current_article = PostArticle.objects.get(id=self.kwargs['pk'])
+        context = super(CreateComment, self).get_context_data(*args, **kwargs)
+        context['title'] = f'comment to article "{current_article.title}"'
+        return context
+
+
 def likes(request, pk):
     current_article = PostArticle.objects.get(id=pk)
     current_article.likes += 1
     current_article.save()
     return redirect('home')
-
-
