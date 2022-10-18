@@ -31,24 +31,24 @@
 
             {% for article in articles %}
                 <div class="container-items">
-                <p class="topic-title">
-                    {{ article.title }}
-                </p>
-                <p class="topic-content">
-                    {{ article.content }}
-                </p>
-                <p class="topic-author">
-                    author: {{ article.user.first_name }} {{ article.user.last_name }}
-                </p>
-                <div class="status-topic">
-                    <div class="status-data-left" style="background-color: darkslategrey">{{ article.likes }}</div>
-                        <a href="{% url 'likes' article.id %}"><img class="like-button" src="{% static 'icons/like.png' %}"></a>
-                    <div class="status-data-left" style="background-color: darkslategrey">{{ article.likes }}</div>
-                        <a href="{% url 'likes' article.id %}"><img class="like-button" src="{% static 'icons/comment-black.png' %}"></a>
-                    <div class="status-data-right">{{ article.date_created }}</div>
+                    <p class="topic-title">
+                        {{ article.title }}
+                    </p>
+                    <p class="topic-content">
+                        {{ article.content }}
+                    </p>
+                    <p class="topic-author">
+                        author: {{ article.user.first_name }} {{ article.user.last_name }}
+                    </p>
+                    <div class="status-topic">
+                        <div class="status-data-left" style="background-color: darkslategrey">{{ article.likes }}</div>
+                            <a href="{% url 'likes' article.id %}"><img class="like-button" src="{% static 'icons/like.png' %}"></a>
+                        <div class="status-data-left" style="background-color: darkslategrey">{{ article.comments|length }}</div>
+                            <a href="{% url 'article-details' article.id %}"><img class="like-button" src="{% static 'icons/comment-black.png' %}"></a>
+                        <div class="status-data-right">{{ article.date_created }}</div>
 
+                    </div>
                 </div>
-            </div>
             {% endfor %}
 
         </div>

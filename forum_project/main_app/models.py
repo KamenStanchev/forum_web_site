@@ -44,11 +44,20 @@ class PostArticle(models.Model):
     def __str__(self):
         return f"{self.user}: {self.title}"
 
+    @property
+    def comments(self):
+        result = self.articlecomment_set.all()
+        return result
+
 
 class ArticleComment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     post_article = models.ForeignKey(PostArticle, on_delete=models.CASCADE)
-    content = models.TextField()
+    content = models.TextField(max_length=300)
+    data_created = models.DateTimeField(auto_now_add=True)
+    likes = models.IntegerField(default=0)
+
+
 
 
 

@@ -1,7 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from django.views.generic import CreateView
+from django.views.generic import CreateView, DetailView
 
 from forum_project.main_app.forms import EditProfileForm
 from forum_project.main_app.models import Profile, Topic, PostArticle, ArticleComment
@@ -33,7 +33,7 @@ def edit_profile(request):
     return render(request, 'registration.html', {'form': form, 'title': title, 'profile': user_profile})
 
 
-class CreatePostArticle(LoginRequiredMixin, CreateView):
+class CreateArticle(LoginRequiredMixin, CreateView):
     model = PostArticle
     fields = ['title', 'content', 'topic']
     template_name = 'form.html'
@@ -44,9 +44,15 @@ class CreatePostArticle(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
     def get_context_data(self, *args, **kwargs):
-        context = super(CreatePostArticle, self).get_context_data(*args, **kwargs)
+        context = super(CreateArticle, self).get_context_data(*args, **kwargs)
         context['title'] = 'CREATE ARTICLE'
         return context
+
+
+class ArticleDetails(DetailView):
+    model = PostArticle
+    template_name = 'article-detail.html'
+    context_object_name = "article"
 
 
 class CreateComment(LoginRequiredMixin, CreateView):

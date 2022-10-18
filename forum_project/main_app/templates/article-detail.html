@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block page_content %}
+    <div class="main-container">
+        <div class="central-container">
+
+                <p class="container-name">
+                    Article Details
+                </p>
+            <div class="container-items">
+                <p class="topic-title">
+                    {{ article.title }}
+                </p>
+                <p class="topic-content">
+                    {{ article.content }}
+                </p>
+                <p class="topic-author">
+                    author: {{ article.user.first_name }} {{ article.user.last_name }}
+                </p>
+                <div class="status-topic">
+                    <div class="status-data-left" style="background-color: darkslategrey">{{ article.likes }}</div>
+                        <a href="{% url 'likes' article.id %}"><img class="like-button" src="{% static 'icons/like.png' %}"></a>
+                    <div class="status-data-left" style="background-color: darkslategrey">{{ article.comments|length }}</div>
+                        <a href="{% url 'article-details' article.id %}"><img class="like-button" src="{% static 'icons/comment-black.png' %}"></a>
+                    <div class="status-data-right">{{ article.date_created }}</div>
+                </div>
+            </div>
+
+            <a href="{% url 'create-comment' article.pk %}"
+                    style="
+                    width: 120px;
+                    margin: 10px 0;
+                    align-self: center;
+                    border: black 2px solid;
+                    background-color: #4F4247;
+                    color: white;
+                    text-align: center;
+                    box-shadow: black 6px 6px 16px;
+            "
+            >Add Comment</a>
+             <p class="container-name">
+                 {# link to create new comment #}
+                    Comments
+                </p>
+        {# Start loop for all article's coments   #}
+            {% for comment in article.comments %}
+            <div class="container-items">
+                <p class="topic-title">
+                    {{ comment.user.username }}
+                </p>
+                <p class="topic-content">
+                    {{ comment.content }}
+                </p>
+                <br>
+                <p class="topic-author">
+                    {# empty row, here can be inputed text #}
+                </p>
+                <div class="status-topic">
+                    <div class="status-data-left" style="background-color: darkslategrey">{{ article.likes }}</div>
+                        <a href="{% url 'likes' article.id %}"><img class="like-button" src="{% static 'icons/like.png' %}"></a>
+                    <div class="status-data-right">{{ comment.data_created }}</div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}
