@@ -2,13 +2,80 @@
 
 {% load static %}
 
+
+
 {% block page_content %}
+
+    <style>
+        .container-comment{
+            box-shadow: #1b1b1b 6px 6px 36px 3px;
+            background-color: whitesmoke;
+            align-self: center;
+            width: 500px;
+            margin: 15px;
+        }
+
+        .comment-content{
+            margin: 5px;
+        }
+
+        .comment-details{
+            display: flex;
+            justify-content: space-between;
+            height: 60px;
+            margin: 5px;
+        }
+
+        .comment-details-left{
+            display: flex;
+            flex-direction: row;
+            height: 59px;
+        }
+
+        .comment-user-img{
+           height: 55px;
+            width: 55px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin: 2% 0 3% 0;
+        }
+
+        .comment-user-name{
+            margin: auto 5px;
+        }
+
+        .comment-details-right{
+            display: flex;
+            flex-direction: column;
+        }
+
+        .comment-likes-details{
+            padding-right: 5px;
+            align-self: end;
+        }
+
+        .comment-likes-count{
+            color: black;
+            font-weight: bold;
+            font-size: 18px;
+            vertical-align: top;
+            padding: 0 6px 0 6px;
+            border: black 1px solid;
+            border-radius: 50%;
+        }
+
+        .comment-data-created{
+            font-size: 12px;
+        }
+
+
+
+
+
+    </style>
+
     <div class="main-container">
         <div class="central-container">
-
-                <p class="container-name">
-                    Article Details
-                </p>
             <div class="container-items">
                 <p class="topic-title">
                     {{ article.title }}
@@ -20,9 +87,9 @@
                     author: {{ article.user.first_name }} {{ article.user.last_name }}
                 </p>
                 <div class="status-topic">
-                    <div class="status-data-left" style="background-color: darkslategrey">{{ article.likes }}</div>
+                    <div class="status-data-left">{{ article.likes }}</div>
                         <a href="{% url 'likes' article.id %}"><img class="like-button" src="{% static 'icons/like.png' %}"></a>
-                    <div class="status-data-left" style="background-color: darkslategrey">{{ article.comments|length }}</div>
+                    <div class="status-data-left">{{ article.comments|length }}</div>
                         <a href="{% url 'article-details' article.id %}"><img class="like-button" src="{% static 'icons/comment-black.png' %}"></a>
                     <div class="status-data-right">{{ article.date_created }}</div>
                 </div>
@@ -30,39 +97,46 @@
 
             <a href="{% url 'create-comment' article.pk %}"
                     style="
-                    width: 120px;
-                    margin: 10px 0;
+                    margin: 10px 0 10px 0 ;
+                    padding: 10px;
+                    font-weight: bold;
                     align-self: center;
                     border: black 2px solid;
-                    background-color: #4F4247;
-                    color: white;
+                    background-color: white;
+                    color: black;
                     text-align: center;
-                    box-shadow: black 6px 6px 16px;
+                    box-shadow: black 6px 6px 36px 2px;
             "
             >Add Comment</a>
-             <p class="container-name">
-                 {# link to create new comment #}
-                    Comments
-                </p>
+
         {# Start loop for all article's coments   #}
-            {% for comment in article.comments %}
-            <div class="container-items">
-                <p class="topic-title">
-                    {{ comment.user.username }}
-                </p>
-                <p class="topic-content">
-                    {{ comment.content }}
-                </p>
-                <br>
-                <p class="topic-author">
-                    {# empty row, here can be inputed text #}
-                </p>
-                <div class="status-topic">
-                    <div class="status-data-left" style="background-color: darkslategrey">{{ article.likes }}</div>
-                        <a href="{% url 'likes' article.id %}"><img class="like-button" src="{% static 'icons/like.png' %}"></a>
-                    <div class="status-data-right">{{ comment.data_created }}</div>
+            {% for comment in comments %}
+                <div class="container-comment">
+                    <div class="comment-content">
+                        {{ comment.content }}
+                    </div>
+                    <div class="comment-details">
+                        <div class="comment-details-left">
+                            <div >
+                                <img class="comment-user-img" src="{{ comment.user.profile.profile_img.url }}">
+                            </div>
+                            <div class="comment-user-name">
+                                {{ comment.user.username }}
+                            </div>
+                        </div>
+                        <div class="comment-details-right">
+                            <div class="comment-likes-details">
+                                <a href="{% url 'like_comment' comment.id %}">
+                                    <img class="like-button" src="{% static 'icons/like.png' %}">
+                                </a>
+                                <span class="comment-likes-count">{{ comment.likes }}</span>
+                            </div>
+                            <div>
+                                <span class="comment-data-created">{{ comment.data_created }}</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
             {% endfor %}
         </div>
     </div>

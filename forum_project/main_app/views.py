@@ -10,7 +10,7 @@ from forum_project.main_app.models import Profile, Topic, PostArticle, ArticleCo
 def home(request):
     topics = Topic.objects.all()
     profiles = Profile.objects.all()
-    articles = PostArticle.objects.all()
+    articles = reversed(PostArticle.objects.all())
     context = {
         'topics': topics,
         'profiles': profiles,
@@ -38,6 +38,8 @@ class CreateArticle(LoginRequiredMixin, CreateView):
     fields = ['title', 'content', 'topic']
     template_name = 'form.html'
     success_url = reverse_lazy('home')
+    login_url = '/login/'
+    redirect_field_name = 'redirect_to'
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -53,6 +55,14 @@ class ArticleDetails(DetailView):
     model = PostArticle
     template_name = 'article-detail.html'
     context_object_name = "article"
+
+    def get_context_data(self, *args, **kwargs):
+        current_article = PostArticle.objects.get(id=self.kwargs['pk'])
+        comments = reversed(current_article.articlecomment_set.all())
+        context = super(ArticleDetails, self).get_context_data(*args, **kwargs)
+
+        context['comments'] = comments
+        return context
 
 
 class CreateComment(LoginRequiredMixin, CreateView):
@@ -79,3 +89,10 @@ def likes(request, pk):
     current_article.likes += 1
     current_article.save()
     return redirect('home')
+
+
+def like_comment(request, pk):
+    current_comment = ArticleComment.objects.get(id=pk)
+    current_comment.likes += 1
+    current_comment.save()
+    return redirect('article-details', current_comment.post_article.id)
