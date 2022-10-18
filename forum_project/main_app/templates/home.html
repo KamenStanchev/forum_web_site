@@ -32,7 +32,7 @@
             {% for article in articles %}
                 <div class="container-items">
                     <p class="topic-title">
-                        <a style="color: white" href="{% url 'article-details' article.id %}">{{ article.title }}</a>
+                        <a style="color: black" href="{% url 'article-details' article.id %}">{{ article.title }}</a>
                     </p>
                     <p class="topic-content">
                         {{ article.content|truncatechars:400 }}
