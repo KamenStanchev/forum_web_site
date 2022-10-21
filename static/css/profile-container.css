@@ -7,10 +7,11 @@
         margin-top: 14px;
         margin-left: auto;
         margin-right: auto;
-        border: black 3px solid;
+        border: black 1px solid;
         border-radius: 4px;
-        background-color: #e3e3da;
+        background-color:whitesmoke;
         font-size: 15px;
+        box-shadow: black 2px 2px 5px;
     }
 
     .profile-details{
@@ -26,7 +27,7 @@
     }
 
     .profile-data-element{
-        box-shadow: black 1px 1px 1px 1px;
+        box-shadow: black 1px 1px 1px;
     }
 
     .profile-img-container{
@@ -51,7 +52,7 @@
         margin-left: -1px;
         margin-right: -1px;
         padding: 2px 5px 1px;
-        background-color: black;
+        background-color: #9A9DF7;
     }
 
     .statistic-icon{
@@ -60,7 +61,7 @@
     }
 
     .statistic-details{
-        color: white;
+        color: black;
     }
 
 

@@ -1,3 +1,17 @@
+    .left-container{
+        display: flex;
+        overflow-y: auto;
+        overflow-x: hidden;
+        flex-direction: column;
+        background-color: whitesmoke;
+        flex: 0.7;
+        margin-left: 14px;
+        padding-bottom: 15px;
+        max-height: 685px;
+        box-shadow: black 2px 2px 15px;
+
+    }
+
     .p-container{
         margin: 7px 0 6px 3px;
         transition: transform .2s;
@@ -13,7 +27,7 @@
         text-decoration: none;
         font-weight: bold;
         color: black;
-        background-color: lightblue;
+        background-color: #9A9DF7;
         border: black 1px solid;
         padding: 3px 9px;
         border-radius: 12px;

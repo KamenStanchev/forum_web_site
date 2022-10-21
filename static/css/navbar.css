@@ -6,7 +6,7 @@
             .dropdown-content {
               display: none;
               position: absolute;
-              background-color: black;
+              background-color: #9A9DF7;
               min-width: 160px;
               box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
               padding: 12px 16px;
@@ -22,7 +22,7 @@
         margin-top: -12px;
     }
 
-         .navbar{
+    .navbar{
         display: flex;
         background-color: gray;
         height: 42px;
@@ -31,7 +31,7 @@
         color: white;
         border: black 1px solid;
         border-radius: 3px;
-        box-shadow: #38393b 0 12px 12px;
+        box-shadow: #38393b 0 8px 12px;
         position: fixed;
         top: 0;
         left: 0;
