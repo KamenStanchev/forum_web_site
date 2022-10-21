@@ -11,6 +11,12 @@ def topics_choices():
     result = tuple(result_as_list)
     return result
 
+def calculate_likes(list_of_objects):
+    likes = 0
+    for obj in list_of_objects:
+        likes += obj.likes
+    return likes
+
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -23,6 +29,25 @@ class Profile(models.Model):
 
     def __str__(self):
         return f'profile for: {self.user}'
+
+    @property
+    def received_likes(self):
+        post_articles = self.user.postarticle_set.all()
+        post_comments = self.user.articlecomment_set.all()
+        result = calculate_likes(post_articles) + calculate_likes(post_comments)
+        return result
+
+    @property
+    def all_post_articles(self):
+        post_articles = self.user.postarticle_set.all()
+        result = len(post_articles)
+        return result
+
+    @property
+    def all_comments(self):
+        post_comments = self.user.articlecomment_set.all()
+        result = len(post_comments)
+        return result
 
 
 class Topic(models.Model):
