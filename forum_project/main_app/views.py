@@ -70,7 +70,6 @@ class CreateComment(LoginRequiredMixin, CreateView):
     model = ArticleComment
     fields = ['content', ]
     template_name = 'form.html'
-    # success_url = reverse_lazy('home')
 
     def form_valid(self, form):
         current_article = PostArticle.objects.get(id=self.kwargs['pk'])
@@ -101,3 +100,10 @@ def like_comment(request, pk):
     current_comment.likes += 1
     current_comment.save()
     return redirect('article-details', current_comment.post_article.id)
+
+
+class ProfileDetails(DetailView):
+    model = Profile
+    template_name = 'profile-details.html'
+    context_object_name = 'profile'
+

@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+
+{% block page_content %}
+
+    <style>
+        .profile-container{
+            height: 500px;
+            margin-top: 100px;
+        }
+        .profile-details {
+            height: 450px;
+        }
+    </style>
+
+     <div class="profile-container">
+                    <div class="profile-details">
+                        <div class="profile-data">
+                            <div class="profile-data-element">
+                                Name: {{ profile.first_name }}
+                            </div>
+                            <div class="profile-data-element">
+                                Family-name: {{ profile.last_name }}
+                            </div>
+                            <div class="profile-data-element">
+                                city: {{ profile.city }}
+                            </div>
+                            <div class="profile-data-element">
+                                profession: {{ profile.profession }}
+                            </div>
+                        </div>
+                        <div class="profile-img-container">
+                            <img class="profile-img" src="{{ profile.profile_img.url }}">
+                        </div>
+                    </div>
+
+                    <div class="profile-statistic">
+                        <span class="statistic-details">
+                            {{ profile.all_post_articles}} <img class="statistic-icon" src="{% static 'icons/topic.jpg'%}">
+                        </span>
+                        <span class="statistic-details">
+                            {{ profile.all_comments }} <img class="statistic-icon" src="{% static 'icons/comment.png'%}">
+                        </span>
+                        <span class="statistic-details">
+                            {{ profile.received_likes }} <img class="statistic-icon" src="{% static 'icons/white-like-.png'%}">
+                        </span>
+                    </div>
+     </div>
+
+{% endblock page_content%}
