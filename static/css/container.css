@@ -22,7 +22,11 @@
         background: linear-gradient(transparent, lightseagreen);
     }
 
-    .
+    .container-name{
+        align-self: center;
+        font-size: 23px;
+    }
+
     .central-container{
         display: flex;
         overflow-y: scroll;
@@ -35,6 +39,8 @@
     }
 
     .right-container{
+        display: flex;
+        flex-direction: column;
         background-color: whitesmoke;
         flex: 1;
         margin-left: 20px;

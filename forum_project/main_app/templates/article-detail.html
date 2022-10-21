@@ -91,7 +91,7 @@
                     <div class="status-data-left">{{ article.likes }}</div>
                         <a href="{% url 'likes' article.id %}"><img class="like-button" src="{% static 'icons/like.png' %}"></a>
                     <div class="status-data-left">{{ article.comments|length }}</div>
-                        <a href="{% url 'article-details' article.id %}"><img class="like-button" src="{% static 'icons/comment-black.png' %}"></a>
+                        <a href="{% url 'create-comment' article.id %}"><img class="like-button" src="{% static 'icons/comment-black.png' %}"></a>
                     <div class="status-data-right">{{ article.date_created }}</div>
                 </div>
             </div>

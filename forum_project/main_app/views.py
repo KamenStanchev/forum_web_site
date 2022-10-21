@@ -1,6 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, DetailView
 
 from forum_project.main_app.forms import EditProfileForm
@@ -69,7 +70,7 @@ class CreateComment(LoginRequiredMixin, CreateView):
     model = ArticleComment
     fields = ['content', ]
     template_name = 'form.html'
-    success_url = reverse_lazy('home')
+    # success_url = reverse_lazy('home')
 
     def form_valid(self, form):
         current_article = PostArticle.objects.get(id=self.kwargs['pk'])
@@ -83,12 +84,16 @@ class CreateComment(LoginRequiredMixin, CreateView):
         context['title'] = f'comment to article "{current_article.title}"'
         return context
 
+    def get_success_url(self):
+        current_article = PostArticle.objects.get(id=self.kwargs['pk'])
+        return reverse('article-details', kwargs={"pk": current_article.id})
+
 
 def likes(request, pk):
     current_article = PostArticle.objects.get(id=pk)
     current_article.likes += 1
     current_article.save()
-    return redirect('home')
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
 
 def like_comment(request, pk):
