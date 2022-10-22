@@ -8,11 +8,25 @@
 
     <style>
         .profile-container{
-            height: 500px;
-            margin-top: 100px;
+            height: 450px;
+            width: auto;
+            margin: 100px;
         }
         .profile-details {
             height: 450px;
+        }
+        .tooltip-text {
+            visibility: hidden;
+            position: absolute;
+            color: black;
+            font-size: 12px;
+            background-color: lightcyan;
+            border-radius: 10px;
+            padding: 5px;
+        }
+
+        .statistic-details:hover .tooltip-text {
+          visibility: visible;
         }
     </style>
 
@@ -39,13 +53,19 @@
 
                     <div class="profile-statistic">
                         <span class="statistic-details">
-                            {{ profile.all_post_articles}} <img class="statistic-icon" src="{% static 'icons/topic.jpg'%}">
+                            {{ profile.all_post_articles}}
+                            <span class="tooltip-text">total posted articles</span>
+                            <img class="statistic-icon" src="{% static 'icons/topic.jpg'%}">
                         </span>
                         <span class="statistic-details">
-                            {{ profile.all_comments }} <img class="statistic-icon" src="{% static 'icons/comment.png'%}">
+                            {{ profile.all_comments }}
+                            <span class="tooltip-text">total comments</span>
+                            <img class="statistic-icon" src="{% static 'icons/comment.png'%}">
                         </span>
                         <span class="statistic-details">
-                            {{ profile.received_likes }} <img class="statistic-icon" src="{% static 'icons/white-like-.png'%}">
+                            {{ profile.received_likes }}
+                            <span class="tooltip-text">total received likes </span>
+                            <img class="statistic-icon" src="{% static 'icons/white-like-.png'%}">
                         </span>
                     </div>
      </div>
