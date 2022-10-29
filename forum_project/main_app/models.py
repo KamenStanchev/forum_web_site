@@ -11,6 +11,7 @@ def topics_choices():
     result = tuple(result_as_list)
     return result
 
+
 def calculate_likes(list_of_objects):
     likes = 0
     for obj in list_of_objects:
@@ -63,8 +64,13 @@ class PostArticle(models.Model):
     likes = models.IntegerField(default=0)
     date_created = models.DateTimeField(auto_now_add=True)
     topic = models.CharField(max_length=30, choices=topics_choices(), default='NO TOPIC')
-
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    users_which_liked_article = models.ManyToManyField(
+        User,
+        related_name='user_lied_article',
+        blank=True,
+    )
 
     def __str__(self):
         return f"{self.user}: {self.title}"
@@ -81,6 +87,11 @@ class ArticleComment(models.Model):
     content = models.TextField(max_length=300)
     data_created = models.DateTimeField(auto_now_add=True)
     likes = models.IntegerField(default=0)
+    users_which_liked_comment = models.ManyToManyField(
+        User,
+        related_name='user_lied_comment',
+        blank=True,
+    )
 
 
 

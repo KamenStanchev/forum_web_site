@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
@@ -88,17 +89,23 @@ class CreateComment(LoginRequiredMixin, CreateView):
         return reverse('article-details', kwargs={"pk": current_article.id})
 
 
+@login_required
 def likes(request, pk):
     current_article = PostArticle.objects.get(id=pk)
-    current_article.likes += 1
-    current_article.save()
+    if request.user not in current_article.users_which_liked_article.all():
+        current_article.likes += 1
+        current_article.users_which_liked_article.add(request.user)
+        current_article.save()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
 
+@login_required
 def like_comment(request, pk):
     current_comment = ArticleComment.objects.get(id=pk)
-    current_comment.likes += 1
-    current_comment.save()
+    if request.user not in current_comment.users_which_liked_comment.all():
+        current_comment.likes += 1
+        current_comment.users_which_liked_comment.add(request.user)
+        current_comment.save()
     return redirect('article-details', current_comment.post_article.id)
 
 
