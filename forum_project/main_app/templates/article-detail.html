@@ -68,7 +68,21 @@
             font-size: 12px;
         }
 
+        .add_comment-and-delete-and-edit-button{
+            margin: 15px;
+            padding: 10px;
+            font-weight: bold;
+            align-self: center;
+            background-color: white;
+            color: black;
+            text-align: center;
+            box-shadow: #1b1b1b 4px 4px 10px;
+        }
 
+        .delete-edit-container{
+            align-self: center;
+            margin: 35px ;
+        }
 
 
 
@@ -96,18 +110,22 @@
                 </div>
             </div>
 
+            {% if user.id == article.user.id %}
+                <div class="delete-edit-container">
+                <a href="{% url 'edit-article' article.pk %}"
+                    class="add_comment-and-delete-and-edit-button"
+                    style="background-color: green">
+                    EDIT ARTICLE</a>
+                <a href="{% url 'delete-article' article.pk %}"
+                    style="background-color: red"
+                    class="add_comment-and-delete-and-edit-button">
+                    DELETE ARTICLE</a>
+                </div>
+            {% endif %}
+
             <a href="{% url 'create-comment' article.pk %}"
-                    style="
-                    margin: 15px 0 10px 0 ;
-                    padding: 10px;
-                    font-weight: bold;
-                    align-self: center;
-                    background-color: white;
-                    color: black;
-                    text-align: center;
-                    box-shadow: #1b1b1b 4px 4px 10px;
-            "
-            >Add Comment</a>
+                    class="add_comment-and-delete-and-edit-button">
+                Add Comment</a>
 
         {# Start loop for all article's coments   #}
             {% for comment in comments %}

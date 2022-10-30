@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+
+{% block page_content %}
+
+    <div style="margin: 75px 0; font-size: 32px; color: darkred; height: 550px">
+    {% if exception %}
+      <p>{{ exception }}</p>
+    {% else %}
+      <p>Static generic message</p>
+    {% endif %}
+    </div>
+{% endblock %}

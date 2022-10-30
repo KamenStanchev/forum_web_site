@@ -1,11 +1,12 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import PermissionDenied
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy, reverse
-from django.views.generic import CreateView, DetailView
+from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
 
-from forum_project.main_app.forms import EditProfileForm
+from forum_project.main_app.forms import EditProfileForm, DeleteArticleForm
 from forum_project.main_app.models import Profile, Topic, PostArticle, ArticleComment
 
 
@@ -23,6 +24,7 @@ def home(request):
 
 def edit_profile(request):
     title = 'EDIT PROFILE'
+    button_title = 'EDIT'
     user_profile = request.user.profile
     if request.method == 'POST':
         form = EditProfileForm(request.POST, request.FILES, instance=user_profile)
@@ -32,7 +34,11 @@ def edit_profile(request):
             return redirect('home')
     else:
         form = EditProfileForm(instance=user_profile)
-    return render(request, 'registration.html', {'form': form, 'title': title, 'profile': user_profile})
+    context = {'form': form,
+               'title': title,
+               'profile': user_profile,
+               'button_title':button_title,}
+    return render(request, 'registration.html', context)
 
 
 class CreateArticle(LoginRequiredMixin, CreateView):
@@ -50,6 +56,7 @@ class CreateArticle(LoginRequiredMixin, CreateView):
     def get_context_data(self, *args, **kwargs):
         context = super(CreateArticle, self).get_context_data(*args, **kwargs)
         context['title'] = 'CREATE ARTICLE'
+        context['button_title'] = 'CREATE'
         return context
 
 
@@ -64,6 +71,49 @@ class ArticleDetails(DetailView):
         context = super(ArticleDetails, self).get_context_data(*args, **kwargs)
 
         context['comments'] = comments
+        return context
+
+
+class EditArticle(LoginRequiredMixin, UpdateView):
+    model = PostArticle
+    template_name = 'form.html'
+    fields = ['title', 'content', 'topic', ]
+
+    def get_object(self, *args, **kwargs):
+        obj = super(EditArticle, self).get_object(*args, **kwargs)
+        if not obj.user == self.request.user:
+            raise PermissionDenied(" WARNING: You do not have permission to EDIT Article of Other Users, Be Careful!!!")
+        return obj
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(EditArticle, self).get_context_data(*args, **kwargs)
+        context['title'] = 'EDIT ARTICLE'
+        context['button_title'] = 'EDIT'
+        return context
+
+    def get_success_url(self):
+        current_article = PostArticle.objects.get(id=self.kwargs['pk'])
+        return reverse('article-details', kwargs={"pk": current_article.id})
+
+
+class DeleteArticle(LoginRequiredMixin, DeleteView):
+    model = PostArticle
+    template_name = 'form.html'
+    # form_class = DeleteArticleForm
+    success_url = reverse_lazy('home')
+
+    def get_object(self, *args, **kwargs):
+        obj = super(DeleteArticle, self).get_object(*args, **kwargs)
+        if not obj.user == self.request.user:
+            raise PermissionDenied(
+                " WARNING: You do not have permission to DELETE Article of Other Users, Be Careful!!!")
+        return obj
+
+    def get_context_data(self, *args, **kwargs):
+        current_article = PostArticle.objects.get(id=self.kwargs['pk'])
+        context = super(DeleteArticle, self).get_context_data(*args, **kwargs)
+        context['title'] = f'Do you want to delete {current_article.title}?'
+        context['button_title'] = 'DELETE'
         return context
 
 
@@ -82,12 +132,15 @@ class CreateComment(LoginRequiredMixin, CreateView):
         current_article = PostArticle.objects.get(id=self.kwargs['pk'])
         context = super(CreateComment, self).get_context_data(*args, **kwargs)
         context['title'] = f'comment to article "{current_article.title}"'
+        context['button_title'] = 'comment'
         return context
 
     def get_success_url(self):
         current_article = PostArticle.objects.get(id=self.kwargs['pk'])
         return reverse('article-details', kwargs={"pk": current_article.id})
 
+
+# TODO - UPDATE HOW TO CALCULATE TOTAL LIKES
 
 @login_required
 def likes(request, pk):
@@ -113,4 +166,3 @@ class ProfileDetails(DetailView):
     model = Profile
     template_name = 'profile-details.html'
     context_object_name = 'profile'
-
