@@ -61,24 +61,22 @@ class Topic(models.Model):
 class PostArticle(models.Model):
     title = models.CharField(max_length=30, unique=True)
     content = models.TextField()
-    # likes = models.IntegerField(default=0)
     date_created = models.DateTimeField(auto_now_add=True)
     topic = models.CharField(max_length=30, choices=topics_choices(), default='NO TOPIC')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-
     users_which_liked_article = models.ManyToManyField(
         User,
         related_name='user_lied_article',
         blank=True,
     )
 
+    def __str__(self):
+        return f"{self.user}: {self.title}"
+
     @property
     def likes(self):
         result = len(self.users_which_liked_article.all())
         return result
-
-    def __str__(self):
-        return f"{self.user}: {self.title}"
 
     @property
     def comments(self):

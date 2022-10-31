@@ -10,13 +10,13 @@
                 Topics
             </p>
             <p class="p-container">
-                <a class="topic-link" href="#">
+                <a class="topic-link" href="{% url 'home' %}">
                 ALL
             </a>
             </p>
             {% for topic in topics %}
                 <p class="p-container">
-                <a class="topic-link" href="#">
+                <a class="topic-link" href="{% url 'article-by-topic' pk=topic.id %}">
                 {{ topic }}
             </a>
             </p>
@@ -26,7 +26,7 @@
         <div class="central-container">
 
             <p class="container-name">
-                Latest Posts
+                {{ title_for_articles_container }}
             </p>
 
             {% for article in articles %}

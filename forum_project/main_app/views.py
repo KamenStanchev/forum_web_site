@@ -6,15 +6,26 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
 
-from forum_project.main_app.forms import EditProfileForm, DeleteArticleForm
+from forum_project.main_app.forms import EditProfileForm
 from forum_project.main_app.models import Profile, Topic, PostArticle, ArticleComment
 
 
-def home(request):
+def home(request, pk=None):
     topics = Topic.objects.all()
     profiles = Profile.objects.all()
-    articles = reversed(PostArticle.objects.all())
+    if pk:
+        topic = Topic.objects.get(id=pk)
+        articles = reversed(PostArticle.objects.filter(topic=topic))
+        len_articles = len(PostArticle.objects.filter(topic=topic))
+        if len_articles:
+            title_for_articles_container = f'{len_articles} posts for topic "{topic}"'
+        else:
+            title_for_articles_container = f'There are not post for topic "{topic}"'
+    else:
+        articles = reversed(PostArticle.objects.all())
+        title_for_articles_container = 'Latest Posts'
     context = {
+        'title_for_articles_container': title_for_articles_container,
         'topics': topics,
         'profiles': profiles,
         'articles': articles,
@@ -37,7 +48,7 @@ def edit_profile(request):
     context = {'form': form,
                'title': title,
                'profile': user_profile,
-               'button_title':button_title,}
+               'button_title': button_title, }
     return render(request, 'registration.html', context)
 
 
