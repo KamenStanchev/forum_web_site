@@ -32,6 +32,19 @@ class Profile(models.Model):
         return f'profile for: {self.user}'
 
     @property
+    def full_name(self):
+        result = self.user.username
+        if self.first_name:
+            result = f'{self.first_name}'
+            if self.last_name:
+                return f'{self.first_name} {self.last_name}'
+        if self.last_name:
+            result = f'{self.last_name}'
+            if self.first_name:
+                return f'{self.first_name} {self.last_name}'
+        return result
+
+    @property
     def received_likes(self):
         post_articles = self.user.postarticle_set.all()
         post_comments = self.user.articlecomment_set.all()

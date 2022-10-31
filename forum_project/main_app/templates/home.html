@@ -38,7 +38,7 @@
                         {{ article.content|truncatechars:400 }}
                     </p>
                     <p class="topic-author">
-                        author: {{ article.user.first_name }} {{ article.user.last_name }}
+                        author: <b>{{ article.user.profile.full_name }}</b>
                     </p>
                     <div class="status-topic">
                         <div class="status-data-left">{{ article.likes }}</div>
@@ -46,7 +46,6 @@
                         <div class="status-data-left">{{ article.comments|length }}</div>
                             <a href="{% url 'create-comment' article.id %}"><img class="like-button" src="{% static 'icons/comment-black.png' %}"></a>
                         <div class="status-data-right">{{ article.date_created }}</div>
-
                     </div>
                 </div>
             {% endfor %}
