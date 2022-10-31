@@ -61,7 +61,7 @@ class Topic(models.Model):
 class PostArticle(models.Model):
     title = models.CharField(max_length=30, unique=True)
     content = models.TextField()
-    likes = models.IntegerField(default=0)
+    # likes = models.IntegerField(default=0)
     date_created = models.DateTimeField(auto_now_add=True)
     topic = models.CharField(max_length=30, choices=topics_choices(), default='NO TOPIC')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -71,6 +71,11 @@ class PostArticle(models.Model):
         related_name='user_lied_article',
         blank=True,
     )
+
+    @property
+    def likes(self):
+        result = len(self.users_which_liked_article.all())
+        return result
 
     def __str__(self):
         return f"{self.user}: {self.title}"
@@ -86,12 +91,17 @@ class ArticleComment(models.Model):
     post_article = models.ForeignKey(PostArticle, on_delete=models.CASCADE)
     content = models.TextField(max_length=300)
     data_created = models.DateTimeField(auto_now_add=True)
-    likes = models.IntegerField(default=0)
+    # likes = models.IntegerField(default=0)
     users_which_liked_comment = models.ManyToManyField(
         User,
         related_name='user_lied_comment',
         blank=True,
     )
+
+    @property
+    def likes(self):
+        result = len(self.users_which_liked_comment.all())
+        return result
 
 
 

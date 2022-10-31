@@ -146,7 +146,6 @@ class CreateComment(LoginRequiredMixin, CreateView):
 def likes(request, pk):
     current_article = PostArticle.objects.get(id=pk)
     if request.user not in current_article.users_which_liked_article.all():
-        current_article.likes += 1
         current_article.users_which_liked_article.add(request.user)
         current_article.save()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
@@ -156,7 +155,6 @@ def likes(request, pk):
 def like_comment(request, pk):
     current_comment = ArticleComment.objects.get(id=pk)
     if request.user not in current_comment.users_which_liked_comment.all():
-        current_comment.likes += 1
         current_comment.users_which_liked_comment.add(request.user)
         current_comment.save()
     return redirect('article-details', current_comment.post_article.id)
