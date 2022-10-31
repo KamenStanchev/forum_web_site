@@ -12,6 +12,7 @@ urlpatterns = [
     path('edit-article/<int:pk>', views.EditArticle.as_view(), name='edit-article'),
     path('delete-article/<int:pk>', views.DeleteArticle.as_view(), name='delete-article'),
     path('create-comment/<int:pk>/', views.CreateComment.as_view(), name='create-comment'),
+    path('edit-comment/<int:pk>/', views.EditComment.as_view(), name='edit-comment'),
     path('article-details/<int:pk>/', views.ArticleDetails.as_view(), name='article-details'),
     path('likes/<int:pk>/', views.likes, name='likes'),
     path('like_comment/<int:pk>/', views.like_comment, name='like_comment')

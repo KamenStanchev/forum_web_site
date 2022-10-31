@@ -151,7 +151,28 @@ class CreateComment(LoginRequiredMixin, CreateView):
         return reverse('article-details', kwargs={"pk": current_article.id})
 
 
-# TODO - UPDATE HOW TO CALCULATE TOTAL LIKES
+class EditComment(LoginRequiredMixin, UpdateView):
+    model = ArticleComment
+    template_name = 'form.html'
+    fields = ['content']
+
+    def get_object(self, *args, **kwargs):
+        obj = super(EditComment, self).get_object(*args, **kwargs)
+        if not obj.user == self.request.user:
+            raise PermissionDenied(" WARNING: You do not have permission to EDIT Article of Other Users, Be Careful!!!")
+        return obj
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(EditComment, self).get_context_data(*args, **kwargs)
+        context['title'] = 'EDIT COMMENT'
+        context['button_title'] = 'EDIT'
+        return context
+
+    def get_success_url(self):
+        current_comment = ArticleComment.objects.get(id=self.kwargs['pk'])
+        current_article = current_comment.post_article
+        return reverse('article-details', kwargs={"pk": current_article.id})
+
 
 @login_required
 def likes(request, pk):

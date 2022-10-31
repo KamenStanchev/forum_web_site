@@ -44,6 +44,28 @@
             margin: auto 5px;
         }
 
+        .edit-delete-comment{
+            display: flex;
+            align-self: flex-end;
+            width: 120px;
+            height: 20px;
+            text-align: center;
+        }
+
+        .edit-comment{
+            flex: 1;
+            margin: 0 5px;
+            background-color: limegreen;
+            text-decoration: none;
+        }
+
+        .delete-comment{
+            flex: 1;
+            margin: 0 5px;
+            background-color: red;
+            text-decoration: none;
+        }
+
         .comment-details-right{
             display: flex;
             flex-direction: column;
@@ -142,6 +164,12 @@
                                 {{ comment.user.username }}
                             </div>
                         </div>
+                        {% if request.user == comment.user %}
+                            <div class="edit-delete-comment">
+                                <a class="edit-comment" href="{% url 'edit-comment' pk=comment.id %}">edit</a>
+                                <a class="delete-comment" href="#">delete</a>
+                            </div>
+                        {% endif %}
                         <div class="comment-details-right">
                             <div class="comment-likes-details">
                                 <a href="{% url 'like_comment' comment.id %}">
