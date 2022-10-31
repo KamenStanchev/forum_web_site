@@ -159,13 +159,38 @@ class EditComment(LoginRequiredMixin, UpdateView):
     def get_object(self, *args, **kwargs):
         obj = super(EditComment, self).get_object(*args, **kwargs)
         if not obj.user == self.request.user:
-            raise PermissionDenied(" WARNING: You do not have permission to EDIT Article of Other Users, Be Careful!!!")
+            raise PermissionDenied(
+                " WARNING: You do not have permission to EDIT Comment from Other Users, Be Careful!!!")
         return obj
 
     def get_context_data(self, *args, **kwargs):
         context = super(EditComment, self).get_context_data(*args, **kwargs)
         context['title'] = 'EDIT COMMENT'
         context['button_title'] = 'EDIT'
+        return context
+
+    def get_success_url(self):
+        current_comment = ArticleComment.objects.get(id=self.kwargs['pk'])
+        current_article = current_comment.post_article
+        return reverse('article-details', kwargs={"pk": current_article.id})
+
+
+class DeleteComment(LoginRequiredMixin, DeleteView):
+    model = ArticleComment
+    template_name = 'form.html'
+
+    def get_object(self, *args, **kwargs):
+        obj = super(DeleteComment, self).get_object(*args, **kwargs)
+        if not obj.user == self.request.user and not obj.post_article.user == self.request.user:
+            raise PermissionDenied(
+                " WARNING: You do not have permission to DELETE Comment from Other Users, Be Careful!!!")
+        return obj
+
+    def get_context_data(self, *args, **kwargs):
+        current_comment = ArticleComment.objects.get(id=self.kwargs['pk'])
+        context = super(DeleteComment, self).get_context_data(*args, **kwargs)
+        context['title'] = f'Do you want to delete comment from {current_comment.user.profile.full_name}?'
+        context['button_title'] = 'DELETE'
         return context
 
     def get_success_url(self):

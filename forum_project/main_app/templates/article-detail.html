@@ -164,10 +164,15 @@
                                 {{ comment.user.username }}
                             </div>
                         </div>
+                        {# delete comment if request.user is author of current comment or is author of article where is posted current comment#}
                         {% if request.user == comment.user %}
                             <div class="edit-delete-comment">
                                 <a class="edit-comment" href="{% url 'edit-comment' pk=comment.id %}">edit</a>
-                                <a class="delete-comment" href="#">delete</a>
+                                <a class="delete-comment" href="{% url 'delete-comment' pk=comment.id %}">delete</a>
+                            </div>
+                        {% elif request.user == comment.post_article.user %}
+                            <div class="edit-delete-comment">
+                                <a class="delete-comment" href="{% url 'delete-comment' pk=comment.id %}">delete</a>
                             </div>
                         {% endif %}
                         <div class="comment-details-right">
