@@ -1,7 +1,6 @@
 from django.urls import path
 
 from forum_project.main_app import views
-from forum_project.main_app.views import CreateArticle
 
 urlpatterns = [
     path('', views.home, name='home'),
@@ -11,7 +10,7 @@ urlpatterns = [
     path('profile-details/<int:pk>/', views.ProfileDetails.as_view(), name='profile-details'),
     path('edit-profile/', views.edit_profile, name='edit_profile'),
 
-    path('create-post-article/', CreateArticle.as_view(), name='create_post_article'),
+    path('create-post-article/', views.CreateArticle.as_view(), name='create_post_article'),
     path('edit-article/<int:pk>', views.EditArticle.as_view(), name='edit-article'),
     path('delete-article/<int:pk>', views.DeleteArticle.as_view(), name='delete-article'),
     path('article-details/<int:pk>/', views.ArticleDetails.as_view(), name='article-details'),
