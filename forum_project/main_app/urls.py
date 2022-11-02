@@ -6,6 +6,8 @@ from forum_project.main_app.views import CreateArticle
 urlpatterns = [
     path('', views.home, name='home'),
     path('article-by-topic/<int:pk>', views.home, name='article-by-topic'),
+    path('search-article', views.search_article, name='search-article'),
+
     path('profile-details/<int:pk>/', views.ProfileDetails.as_view(), name='profile-details'),
     path('edit-profile/', views.edit_profile, name='edit_profile'),
 

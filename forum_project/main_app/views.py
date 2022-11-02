@@ -33,6 +33,30 @@ def home(request, pk=None):
     return render(request, 'home.html', context)
 
 
+def search_article(request):
+    topics = Topic.objects.all()
+    profiles = Profile.objects.all()
+    title_for_articles_container = f'You forget to search!'
+    articles = []
+
+    if request.method == 'POST':
+        searched = request.POST['searched']
+        if searched:
+            title_for_articles_container = f'You search for "{searched}"'
+            articles = reversed(PostArticle.objects.filter(title__contains=searched)
+                                | PostArticle.objects.filter(user__profile__first_name__contains=searched)
+                                | PostArticle.objects.filter(user__profile__last_name__contains=searched)
+                                | PostArticle.objects.filter(user__username__contains=searched))
+
+    context = {
+        'title_for_articles_container': title_for_articles_container,
+        'topics': topics,
+        'profiles': profiles,
+        'articles': articles,
+    }
+    return render(request, 'home.html', context)
+
+
 def edit_profile(request):
     title = 'EDIT PROFILE'
     button_title = 'EDIT'
@@ -221,3 +245,4 @@ class ProfileDetails(DetailView):
     model = Profile
     template_name = 'profile-details.html'
     context_object_name = 'profile'
+
