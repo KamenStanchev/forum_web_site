@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.contrib.humanize.templatetags import humanize
 from django.db import models
 
 
@@ -85,6 +86,10 @@ class PostArticle(models.Model):
 
     def __str__(self):
         return f"{self.user}: {self.title}"
+
+    @property
+    def time_ago(self):
+        return humanize.naturaltime(self.date_created)
 
     @property
     def likes(self):

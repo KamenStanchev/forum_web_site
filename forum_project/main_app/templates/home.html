@@ -45,14 +45,14 @@
                             <a href="{% url 'likes' article.id %}"><img class="like-button" src="{% static 'icons/like.png' %}"></a>
                         <div class="status-data-left">{{ article.comments|length }}</div>
                             <a href="{% url 'create-comment' article.id %}"><img class="like-button" src="{% static 'icons/comment-black.png' %}"></a>
-                        <div class="status-data-right">{{ article.date_created }}</div>
+                        <div class="status-data-right">{{ article.time_ago }}</div>
                     </div>
                 </div>
             {% endfor %}
 
             <br/><br/>
             {% if articles_paginator.paginator.num_pages > 1 %}
-                <div style="position: absolute; align-self: center; bottom: 10px; font-size: 15px; ">
+                <div style=" align-self: center; margin-top: 50px; font-size: 15px; ">
                     {% if articles_paginator.has_previous %}
                         <a href="?page=1">&laquo; First</a>
                         <a href="?page={{articles_paginator.previous_page_number}}">Previous</a>

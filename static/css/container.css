@@ -31,7 +31,6 @@
         display: flex;
         overflow-y: scroll;
         flex-direction: column;
-        /*position: relative;*/
         background-color: whitesmoke;
         flex: 3;
         margin-left: 20px;
@@ -108,6 +107,7 @@
     }
 
     .status-data-right{
+        font-size: 14px;
         margin-top: 7px;
         margin-right: 3px;
         flex: 1;
