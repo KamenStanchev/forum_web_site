@@ -31,6 +31,7 @@
                           {% if user.is_authenticated %}
                               <p><a style="color: white" href="{% url 'profile-details' user.profile.id %}">Profile</a></p>
                               <p><a style="color: white" href="{% url 'edit_profile' %}">Edit profile</a></p>
+                              <p><a style="color: white" href="{% url 'my-articles' request.user.id %}">My Articles</a></p>
                               <p><a style="color: white" href="{% url 'create_post_article' %}">Create New Article</a></p>
                           {% else %}
                               <p><a style="color: white" href="{% url 'signup' %}">Create Profile</a></p>

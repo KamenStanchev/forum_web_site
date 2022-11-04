@@ -1,12 +1,13 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User
 from django.core.exceptions import PermissionDenied
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy, reverse
-from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
+from django.views.generic import CreateView, DetailView, UpdateView, DeleteView, ListView
 
 from forum_project.main_app.forms import EditProfileForm
 from forum_project.main_app.models import Profile, Topic, PostArticle, ArticleComment
@@ -39,6 +40,30 @@ def home(request, pk=None):
     return render(request, 'home.html', context)
 
 
+class MyArticlesList(LoginRequiredMixin, ListView):
+    model = PostArticle
+    template_name = 'home.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        pk = self.kwargs['pk']
+        current_user = User.objects.get(id=pk)
+        if not current_user == self.request.user:
+            raise PermissionDenied(" WARNING: You do not have permission to EDIT Article of Other Users, Be Careful!!!")
+        return super(MyArticlesList, self).dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(MyArticlesList, self).get_context_data(*args, **kwargs)
+        context['title_for_articles_container'] = 'MY ARTICLES'
+        context['topics'] = Topic.objects.all()
+        context['profiles'] = Profile.objects.all()
+        current_user = User.objects.get(id=self.kwargs['pk'])
+        articles = PostArticle.objects.filter(user=current_user)
+        p = Paginator(articles, 3)
+        page = self.request.GET.get('page')
+        context['articles_paginator'] = p.get_page(page)
+        return context
+
+
 def search_article(request):
     articles_list = PostArticle.objects.all()
     query = request.GET.get('q')
@@ -47,7 +72,7 @@ def search_article(request):
             Q(title__icontains=query) | Q(content__icontains=query) | Q(user__username__contains=query)
         ).order_by('-date_created')
 
-    paginator = Paginator(articles_list, 2)# 6 posts per page
+    paginator = Paginator(articles_list, 2)  # 6 posts per page
     page = request.GET.get('page')
 
     try:
@@ -64,34 +89,6 @@ def search_article(request):
         'title_for_articles_container': f'You search for "{query}"',
     }
     return render(request, "home.html", context)
-
-
-# def search_article(request, searched=None):
-#     topics = Topic.objects.all()
-#     profiles = Profile.objects.all()
-#     title_for_articles_container = f'You forget to search!'
-#     articles = []
-#
-#     if request.method == 'POST':
-#         searched = request.POST['searched']
-#         if searched:
-#             title_for_articles_container = f'You search for "{searched}"'
-#             articles = (PostArticle.objects.filter(title__contains=searched)
-#                         | PostArticle.objects.filter(user__profile__first_name__contains=searched)
-#                         | PostArticle.objects.filter(user__profile__last_name__contains=searched)
-#                         | PostArticle.objects.filter(user__username__contains=searched)).order_by('-date_created')
-#
-#     p = Paginator(articles, 2)
-#     page = request.GET.get('page')
-#     articles_paginator = p.get_page(page)
-#     context = {
-#         'title_for_articles_container': title_for_articles_container,
-#         'topics': topics,
-#         'profiles': profiles,
-#         'articles_paginator': articles_paginator,
-#         'searched': searched,
-#     }
-#     return render(request, 'home.html', context)
 
 
 def edit_profile(request):
@@ -171,7 +168,6 @@ class EditArticle(LoginRequiredMixin, UpdateView):
 class DeleteArticle(LoginRequiredMixin, DeleteView):
     model = PostArticle
     template_name = 'form.html'
-    # form_class = DeleteArticleForm
     success_url = reverse_lazy('home')
 
     def get_object(self, *args, **kwargs):
