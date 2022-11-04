@@ -119,6 +119,10 @@ class ArticleComment(models.Model):
         result = len(self.users_which_liked_comment.all())
         return result
 
+    @property
+    def time_ago(self):
+        return humanize.naturaltime(self.data_created)
+
 
 
 
