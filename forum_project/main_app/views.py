@@ -28,7 +28,7 @@ def home(request, pk=None):
         articles = PostArticle.objects.all().order_by('-date_created')
         title_for_articles_container = 'Latest Posts'
 
-    p = Paginator(articles, 5)
+    p = Paginator(articles, 4)
     page = request.GET.get('page')
     articles_paginator = p.get_page(page)
     context = {
