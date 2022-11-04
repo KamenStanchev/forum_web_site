@@ -29,7 +29,7 @@
                 {{ title_for_articles_container }}
             </p>
 
-            {% for article in articles %}
+            {% for article in articles_paginator %}
                 <div class="container-items">
                     <p class="topic-title">
                         <a style="color: black" href="{% url 'article-details' article.id %}">{{ article.title }}</a>
@@ -49,6 +49,21 @@
                     </div>
                 </div>
             {% endfor %}
+
+            <br/><br/>
+            <div style="align-self: center; font-size: 20px">
+                {% if articles_paginator.has_previous %}
+                <a href="?page=1">&laquo; First</a>
+                <a href="?page={{articles_paginator.previous_page_number}}">Previous</a>
+            {% endif %}
+
+            Page {{ articles_paginator.number }} of {{ articles_paginator.paginator.num_pages }}
+
+            {% if articles_paginator.has_next %}
+                <a href="?page={{articles_paginator.next_page_number}}">Next</a>
+                <a href="?page={{ articles_paginator.paginator.num_pages }}">Last &raquo;</a>
+            {% endif %}
+            </div>
 
         </div>
 
@@ -76,7 +91,7 @@
                             </div>
                         </div>
                         <div class="profile-img-container">
-                            <img class="profile-img" src="{{ profile.profile_img.url }}">
+                            <a href="{%  url 'profile-details' profile.id %}"><img class="profile-img" src="{{ profile.profile_img.url }}"></a>
                         </div>
                     </div>
 

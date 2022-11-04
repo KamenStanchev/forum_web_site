@@ -1,6 +1,8 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy, reverse
@@ -15,46 +17,81 @@ def home(request, pk=None):
     profiles = Profile.objects.all()
     if pk:
         topic = Topic.objects.get(id=pk)
-        articles = reversed(PostArticle.objects.filter(topic=topic))
+        articles = PostArticle.objects.filter(topic=topic).order_by('-date_created')
         len_articles = len(PostArticle.objects.filter(topic=topic))
         if len_articles:
             title_for_articles_container = f'{len_articles} posts for topic "{topic}"'
         else:
             title_for_articles_container = f'There are not post for topic "{topic}"'
     else:
-        articles = reversed(PostArticle.objects.all())
+        articles = PostArticle.objects.all().order_by('-date_created')
         title_for_articles_container = 'Latest Posts'
+
+    p = Paginator(articles, 5)
+    page = request.GET.get('page')
+    articles_paginator = p.get_page(page)
     context = {
         'title_for_articles_container': title_for_articles_container,
         'topics': topics,
         'profiles': profiles,
-        'articles': articles,
+        'articles_paginator': articles_paginator,
     }
     return render(request, 'home.html', context)
 
 
 def search_article(request):
-    topics = Topic.objects.all()
-    profiles = Profile.objects.all()
-    title_for_articles_container = f'You forget to search!'
-    articles = []
+    articles_list = PostArticle.objects.all()
+    query = request.GET.get('q')
+    if query:
+        articles_list = PostArticle.objects.filter(
+            Q(title__icontains=query) | Q(content__icontains=query) | Q(user__username__contains=query)
+        ).order_by('-date_created')
 
-    if request.method == 'POST':
-        searched = request.POST['searched']
-        if searched:
-            title_for_articles_container = f'You search for "{searched}"'
-            articles = reversed(PostArticle.objects.filter(title__contains=searched)
-                                | PostArticle.objects.filter(user__profile__first_name__contains=searched)
-                                | PostArticle.objects.filter(user__profile__last_name__contains=searched)
-                                | PostArticle.objects.filter(user__username__contains=searched))
+    paginator = Paginator(articles_list, 2)# 6 posts per page
+    page = request.GET.get('page')
+
+    try:
+        articles_paginator = paginator.page(page)
+    except PageNotAnInteger:
+        articles_paginator = paginator.page(1)
+    except EmptyPage:
+        articles_paginator = paginator.page(paginator.num_pages)
 
     context = {
-        'title_for_articles_container': title_for_articles_container,
-        'topics': topics,
-        'profiles': profiles,
-        'articles': articles,
+        'articles_paginator': articles_paginator,
+        'topics': Topic.objects.all(),
+        'profiles': Profile.objects.all(),
+        'title_for_articles_container': f'You search for "{query}"',
     }
-    return render(request, 'home.html', context)
+    return render(request, "home.html", context)
+
+
+# def search_article(request, searched=None):
+#     topics = Topic.objects.all()
+#     profiles = Profile.objects.all()
+#     title_for_articles_container = f'You forget to search!'
+#     articles = []
+#
+#     if request.method == 'POST':
+#         searched = request.POST['searched']
+#         if searched:
+#             title_for_articles_container = f'You search for "{searched}"'
+#             articles = (PostArticle.objects.filter(title__contains=searched)
+#                         | PostArticle.objects.filter(user__profile__first_name__contains=searched)
+#                         | PostArticle.objects.filter(user__profile__last_name__contains=searched)
+#                         | PostArticle.objects.filter(user__username__contains=searched)).order_by('-date_created')
+#
+#     p = Paginator(articles, 2)
+#     page = request.GET.get('page')
+#     articles_paginator = p.get_page(page)
+#     context = {
+#         'title_for_articles_container': title_for_articles_container,
+#         'topics': topics,
+#         'profiles': profiles,
+#         'articles_paginator': articles_paginator,
+#         'searched': searched,
+#     }
+#     return render(request, 'home.html', context)
 
 
 def edit_profile(request):
@@ -245,4 +282,3 @@ class ProfileDetails(DetailView):
     model = Profile
     template_name = 'profile-details.html'
     context_object_name = 'profile'
-

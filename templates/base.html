@@ -47,9 +47,9 @@
                 </div>
 
                 <div class="right-side">
-                    <form method="POST" action="{% url 'search-article' %}" style="display: flex">
-                        {% csrf_token %}
-                        <input class="search-bar" type="text" placeholder="Search For Article..." name="searched">
+                    <form method="GET" action="{% url 'search-article' %}" style="display: flex">
+                        <input class="search-bar" type="text" placeholder="Search For Article..."
+                               name="q" value="{{ request.GET.q }}">
                         <button class="search-button"><img class="search-button-icon" src="{% static 'icons/search-button.png' %}"></button>
                     </form>
                     {% if user.is_authenticated %}
