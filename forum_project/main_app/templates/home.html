@@ -51,19 +51,21 @@
             {% endfor %}
 
             <br/><br/>
-            <div style="position: absolute; align-self: center; bottom: 10px; font-size: 15px; ">
-                {% if articles_paginator.has_previous %}
-                    <a href="?page=1">&laquo; First</a>
-                    <a href="?page={{articles_paginator.previous_page_number}}">Previous</a>
-                {% endif %}
+            {% if articles_paginator.paginator.num_pages > 1 %}
+                <div style="position: absolute; align-self: center; bottom: 10px; font-size: 15px; ">
+                    {% if articles_paginator.has_previous %}
+                        <a href="?page=1">&laquo; First</a>
+                        <a href="?page={{articles_paginator.previous_page_number}}">Previous</a>
+                    {% endif %}
 
-                Page {{ articles_paginator.number }} of {{ articles_paginator.paginator.num_pages }}
+                    Page {{ articles_paginator.number }} of {{ articles_paginator.paginator.num_pages }}
 
-                {% if articles_paginator.has_next %}
-                    <a href="?page={{articles_paginator.next_page_number}}">Next</a>
-                    <a href="?page={{ articles_paginator.paginator.num_pages }}">Last &raquo;</a>
-                {% endif %}
-            </div>
+                    {% if articles_paginator.has_next %}
+                        <a href="?page={{articles_paginator.next_page_number}}">Next</a>
+                        <a href="?page={{ articles_paginator.paginator.num_pages }}">Last &raquo;</a>
+                    {% endif %}
+                </div>
+            {% endif %}
 
         </div>
 
